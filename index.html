@@ -2903,5 +2903,23 @@
             updateAdminLockIcon();
         });
     </script>
+    <script>
+(function() {
+  const btn = document.createElement('button');
+  btn.innerHTML = '🔓 Admin';
+  btn.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:99999;background:#facc15;color:#000;border:none;padding:10px 14px;border-radius:8px;font-weight:bold;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.4);';
+  btn.onclick = function() {
+    const p = prompt('Admin Password डालें:');
+    if (p === 'Adarsh@2026') {
+      alert('लॉगिन सफल! (आपका पासवर्ड सही है)');
+      const panel = document.querySelector('#admin-panel, .admin-panel, [data-admin], [id*="admin"]');
+      if (panel) panel.style.display = 'block';
+    } else if (p !== null) {
+      alert('गलत पासवर्ड!');
+    }
+  };
+  document.body.appendChild(btn);
+})();
+</script>
 </body>
 </html>
