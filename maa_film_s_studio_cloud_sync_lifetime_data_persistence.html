@@ -1,0 +1,2907 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAA FILM'S STUDIO | Videography, Photography, Music Video & Booking</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Sans Devanagari -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Devanagari', 'sans-serif'],
+                    },
+                    colors: {
+                        studio: {
+                            cream: '#EFE8D8',
+                            gold: '#F59E0B',
+                            amber: '#D97706',
+                            dark: '#0B0F19',
+                            card: '#131926',
+                            border: '#232C3D'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Print styles for clean official receipt printing */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-receipt-area, #printable-receipt-area * {
+                visibility: visible;
+            }
+            #printable-receipt-area {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+                color: black !important;
+                padding: 24px !important;
+                box-shadow: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F59E0B;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-studio-dark text-gray-100 font-sans antialiased selection:bg-amber-500 selection:text-black">
+
+    <!-- Toast Notification Container (No browser alert) -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- Top Tribute & Contact Bar -->
+    <div class="bg-studio-cream text-stone-900 text-xs sm:text-sm py-2 px-4 border-b-2 border-amber-600">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2 font-semibold">
+                <i class="fa-solid fa-film text-amber-700"></i>
+                <span>OWNER: <span class="underline decoration-amber-600">Late Ranjeet Singh</span></span>
+                <span class="hidden md:inline text-stone-500">|</span>
+                <span class="hidden md:inline text-stone-700"><i class="fa-solid fa-location-dot text-red-600 mr-1"></i><span class="dynamic-studio-address">Mankapur, District Gonda, Uttar Pradesh</span></span>
+            </div>
+            <div class="flex items-center gap-3 sm:gap-5 font-medium">
+                <a href="https://wa.me/919026310085" target="_blank" class="dynamic-whatsapp-link flex items-center gap-1.5 text-emerald-800 hover:text-emerald-600 transition font-bold">
+                    <i class="fa-brands fa-whatsapp text-base text-emerald-600"></i>
+                    <span class="dynamic-studio-phone">9026310085</span>
+                </a>
+                <a href="mailto:thegymboyadarshsingh@gmail.com" class="dynamic-email-link hidden sm:flex items-center gap-1.5 text-stone-800 hover:text-amber-700 transition">
+                    <i class="fa-solid fa-envelope text-amber-700"></i>
+                    <span class="dynamic-studio-email">thegymboyadarshsingh@gmail.com</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 bg-studio-dark/95 backdrop-blur-md border-b border-studio-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-2">
+            <!-- Studio Brand -->
+            <div class="flex items-center gap-2.5 sm:gap-3 cursor-pointer shrink-0" onclick="switchView('customer')">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-black shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-video text-lg sm:text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-[9px] sm:text-[11px] tracking-widest text-amber-400 font-bold uppercase">Videography • Photography • Music Video</p>
+                    <h1 class="text-base sm:text-2xl font-black tracking-tight text-white">MAA FILM'S STUDIO</h1>
+                </div>
+            </div>
+
+            <!-- Public Customer Navigation Links -->
+            <nav class="hidden xl:flex items-center gap-5 text-sm font-medium text-gray-300">
+                <a href="#services-section" onclick="switchView('customer')" class="hover:text-amber-400 transition">Services</a>
+                <a href="#gallery-section" onclick="switchView('customer')" class="hover:text-amber-400 transition">Gallery</a>
+                <a href="#reviews-section" onclick="switchView('customer')" class="hover:text-amber-400 transition">Reviews ★</a>
+                <a href="#contact-section" onclick="switchView('customer')" class="hover:text-amber-400 transition">Contact</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                <!-- Follow Studio Button -->
+                <button id="nav-follow-btn" onclick="openFollowModal()" class="relative px-2.5 sm:px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 transition flex items-center gap-1.5">
+                    <i id="follow-bell-icon" class="fa-solid fa-bell text-amber-400 animate-bounce"></i>
+                    <span id="follow-btn-label" class="hidden md:inline">Follow Studio</span>
+                    <span id="follower-count-badge" class="px-1.5 py-0.5 rounded-full bg-amber-500 text-black text-[10px] font-black">128</span>
+                    <span id="unread-offer-dot" class="hidden absolute -top-1 -right-1 w-3 h-3 rounded-full bg-red-500 border-2 border-studio-dark animate-ping"></span>
+                </button>
+
+                <!-- Book Service CTA -->
+                <a href="#services-section" id="nav-customer-btn" onclick="switchView('customer')" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-amber-500 hover:bg-amber-400 text-black transition shadow">
+                    <i class="fa-solid fa-calendar-check mr-1"></i> <span class="hidden sm:inline">Book Now</span><span class="sm:hidden">Book</span>
+                </a>
+
+                <!-- My Receipt Tracker -->
+                <button onclick="openTrackReceiptModal()" class="px-2.5 sm:px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-studio-card hover:bg-slate-800 text-gray-200 border border-studio-border transition" title="My Receipt">
+                    <i class="fa-solid fa-receipt sm:mr-1 text-amber-400"></i> <span class="hidden lg:inline">My Receipt</span>
+                </button>
+
+                <!-- Discrete Admin Lock Access Icon -->
+                <button id="nav-admin-btn" onclick="handleAdminNavClick()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-studio-card hover:bg-slate-800 text-gray-400 hover:text-amber-400 border border-studio-border transition flex items-center justify-center" title="Staff / Owner Login">
+                    <i id="admin-nav-lock-icon" class="fa-solid fa-lock text-xs sm:text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Live Dynamic Offer Ticker Banner -->
+        <div id="live-offer-banner" class="bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-black px-4 py-2 text-xs sm:text-sm font-bold shadow-md">
+            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-black text-amber-400 text-[10px] uppercase tracking-wider font-black">LIVE OFFER</span>
+                    <span id="live-offer-banner-text">लगन स्पेशल ऑफर! Wedding Full Package पर पाएँ ₹3,000 की सीधा छूट + Free Pre-Wedding Reel!</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="openOffersInboxModal()" class="px-3 py-1 rounded-lg bg-black/90 hover:bg-black text-amber-300 text-xs font-bold transition">
+                        ऑफर देखें / बुक करें <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 1: CUSTOMER PUBLIC WEBSITE (BOOKING, GALLERY, REVIEWS, CONTACT)  -->
+    <!-- ===================================================================== -->
+    <main id="customer-view" class="block">
+        <!-- FULL-WIDTH CINEMATIC TOP BANNER SLIDER -->
+        <section id="top-banner-section" class="relative w-full h-[390px] sm:h-[500px] lg:h-[580px] bg-black overflow-hidden border-b border-amber-500/30 select-none">
+            <div id="top-banner-slides" class="w-full h-full relative"></div>
+
+            <!-- Cinematic Gradient Overlays -->
+            <div class="absolute inset-0 bg-gradient-to-t from-studio-dark via-black/45 to-black/25 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/35 to-transparent pointer-events-none"></div>
+
+            <!-- Banner Foreground Content -->
+            <div class="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12 sm:pb-16">
+                <div class="max-w-2xl space-y-3 sm:space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-amber-500/50 text-amber-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                        <span id="banner-slide-tag">4K Cinema Rig & Ronin Gimbal Production</span>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-lg">
+                        MAA FILM'S STUDIO <span class="block text-amber-400 text-lg sm:text-2xl lg:text-3xl font-extrabold mt-1">Videography • Photography • Music Video</span>
+                    </h2>
+
+                    <p id="banner-slide-caption" class="text-gray-200 text-xs sm:text-sm md:text-base max-w-xl drop-shadow">
+                        Adarsh Singh (Certified Video Editor) — शादी, भोजपुरी एल्बम म्यूजिक वीडियो और प्री-वेडिंग की सिनेमैटिक शूटिंग व 4K एडिटिंग।
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
+                        <a href="#services-section" class="px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-black font-extrabold text-xs sm:text-sm shadow-lg shadow-amber-500/25 transition flex items-center gap-2">
+                            <i class="fa-solid fa-clapperboard"></i> अभी बुक करें (Book Now)
+                        </a>
+                        <a href="#gallery-section" class="px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl bg-black/75 hover:bg-black text-white border border-amber-500/40 font-bold text-xs sm:text-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-images text-amber-400"></i> गैलरी देखें
+                        </a>
+                        <button onclick="openFollowModal()" class="px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 backdrop-blur-md text-amber-300 border border-amber-500/50 font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-bell text-amber-400"></i> <span id="hero-follow-text">Follow करें (Offer Alerts)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider Controls -->
+            <button onclick="changeBannerSlide(-1)" aria-label="Previous Banner" class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-amber-500 text-white hover:text-black border border-white/20 flex items-center justify-center transition">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button onclick="changeBannerSlide(1)" aria-label="Next Banner" class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-amber-500 text-white hover:text-black border border-white/20 flex items-center justify-center transition">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div id="top-banner-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2"></div>
+        </section>
+
+        <!-- Studio Director & Trust Highlights Strip -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+            <div class="bg-studio-card/95 backdrop-blur-md rounded-2xl border border-amber-500/30 p-5 sm:p-6 shadow-2xl grid grid-cols-1 md:grid-cols-4 gap-5 items-center">
+                <div class="md:col-span-2 flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-black flex items-center justify-center text-2xl font-black shrink-0 shadow-md">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Owner Tribute: Late Ranjeet Singh</span>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white">Adarsh Singh — Certified Video Editor</h3>
+                        <p class="text-xs text-gray-400 mt-0.5">Sony Alpha 4K Cinema • DJI Ronin RS 3 Gimbal • Wedding & Music Video Production</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 bg-studio-dark/70 p-3.5 rounded-xl border border-studio-border">
+                    <i class="fa-solid fa-star text-amber-400 text-2xl"></i>
+                    <div>
+                        <p id="hero-avg-rating" class="text-base font-extrabold text-white">4.9 / 5.0 ★</p>
+                        <p id="hero-review-count" class="text-xs text-gray-400">Verified Client Reviews</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 bg-studio-dark/70 p-3.5 rounded-xl border border-studio-border">
+                    <i class="fa-solid fa-receipt text-emerald-400 text-2xl"></i>
+                    <div>
+                        <p class="text-base font-extrabold text-white">Instant Receipt</p>
+                        <p class="text-xs text-gray-400">1-Click Online Booking & Pay</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SERVICES & 1-CLICK ONLINE BOOKING SECTION                         -->
+        <!-- ================================================================= -->
+        <section id="services-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-studio-border">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                <div>
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Packages & Pricing</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">हमारी प्रमुख सर्विस और रेट लिस्ट</h3>
+                    <p class="text-gray-400 text-sm mt-1">अपनी आवश्यकता अनुसार पैकेज चुनें, 1-क्लिक में डिटेल भरें, ऑनलाइन पेमेंट करें और तुरंत रसीद पाएं</p>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-emerald-300 bg-emerald-500/10 px-3.5 py-2 rounded-xl border border-emerald-500/30">
+                    <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+                    <span>100% Slot Confirmation & Digital Receipt</span>
+                </div>
+            </div>
+
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- STUDIO PHOTO GALLERY / PORTFOLIO SECTION                          -->
+        <!-- ================================================================= -->
+        <section id="gallery-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-studio-border">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Studio Portfolio</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">हमारी फोटोग्राफी गैलरी (Our Work Gallery)</h3>
+                    <p class="text-gray-400 text-sm mt-1">शादी, ब्राइडल पोर्ट्रेट और प्री-वेडिंग शूट की चुनिंदा झलकियाँ — किसी भी फोटो पर क्लिक करके फुल स्क्रीन में देखें</p>
+                </div>
+
+                <div class="flex flex-wrap gap-2" id="gallery-filter-buttons">
+                    <button onclick="filterGallery('ALL')" data-cat="ALL" class="gal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-black transition">सभी फोटो (All)</button>
+                    <button onclick="filterGallery('Wedding')" data-cat="Wedding" class="gal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-studio-card text-gray-300 hover:bg-slate-800 border border-studio-border transition">Wedding Couple</button>
+                    <button onclick="filterGallery('Bridal Portrait')" data-cat="Bridal Portrait" class="gal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-studio-card text-gray-300 hover:bg-slate-800 border border-studio-border transition">Bridal Portrait</button>
+                    <button onclick="filterGallery('Pre-Wedding')" data-cat="Pre-Wedding" class="gal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-studio-card text-gray-300 hover:bg-slate-800 border border-studio-border transition">Pre-Wedding</button>
+                </div>
+            </div>
+
+            <div id="public-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- CUSTOMER REVIEWS & RATING SECTION (रिव्यू दें और देखें)            -->
+        <!-- ================================================================= -->
+        <section id="reviews-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-studio-border">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+                    <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Client Testimonials</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">कस्टमर रिव्यू और रेटिंग (Customer Reviews)</h3>
+                    <p class="text-gray-400 text-sm mt-1">हमारे संतुष्ट ग्राहकों के अनुभव पढ़ें या अपना खुद का रिव्यू और स्टार रेटिंग दें</p>
+                </div>
+                <div class="flex items-center gap-3 bg-studio-card px-4 py-2.5 rounded-2xl border border-amber-500/30">
+                    <div class="text-amber-400 text-lg">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <div>
+                        <span id="section-avg-rating" class="font-black text-white text-base">4.9</span>
+                        <span class="text-xs text-gray-400"> (<span id="section-review-total">4</span> Reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Left: Write a Review Form -->
+                <div class="lg:col-span-5 bg-studio-card p-6 rounded-2xl border border-amber-500/30 h-fit">
+                    <h4 class="text-lg font-extrabold text-white mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square text-amber-400"></i> अपना रिव्यू दें (Write a Review)
+                    </h4>
+                    <p class="text-xs text-gray-400 mb-4">MAA FILM'S STUDIO की सर्विस आपको कैसी लगी? स्टार रेटिंग चुनें और अपना अनुभव लिखें:</p>
+
+                    <form onsubmit="handleCustomerReviewSubmit(event)" class="space-y-3.5">
+                        <!-- Interactive Star Rating Selector -->
+                        <div>
+                            <label class="block text-xs text-gray-300 mb-1.5">रेटिंग चुनें (Select Star Rating) *</label>
+                            <div id="star-selector" class="flex items-center gap-2 text-2xl">
+                                <button type="button" onclick="setReviewRating(1)" class="star-btn text-amber-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                                <button type="button" onclick="setReviewRating(2)" class="star-btn text-amber-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                                <button type="button" onclick="setReviewRating(3)" class="star-btn text-amber-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                                <button type="button" onclick="setReviewRating(4)" class="star-btn text-amber-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                                <button type="button" onclick="setReviewRating(5)" class="star-btn text-amber-400 hover:scale-110 transition"><i class="fa-solid fa-star"></i></button>
+                                <span id="selected-rating-label" class="text-xs font-bold text-amber-400 ml-2">5 / 5 Excellent</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs text-gray-300 mb-1">आपका नाम *</label>
+                                <input type="text" id="rev-name" required placeholder="उदा. शुभम सिंह" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-300 mb-1">शहर / गाँव *</label>
+                                <input type="text" id="rev-city" required placeholder="उदा. मनकापुर, गोंडा" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-gray-300 mb-1">कौन-सी सर्विस ली थी?</label>
+                            <select id="rev-service" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                                <option value="Wedding Photography & Video">Wedding Photography & Video</option>
+                                <option value="Music Video / Album Shoot">Music Video / Album Shoot</option>
+                                <option value="Pre-Wedding Cinematic Shoot">Pre-Wedding Cinematic Shoot</option>
+                                <option value="4K Video Editing">4K Video Editing</option>
+                                <option value="Event / Birthday Shoot">Event / Birthday Shoot</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-gray-300 mb-1">आपका रिव्यू (Review Comment) *</label>
+                            <textarea id="rev-comment" rows="3" required placeholder="कैमरा क्वालिटी, गिम्बल शूट और एडिटिंग के बारे में अपना अनुभव लिखें..." class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-black font-extrabold text-sm shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-star"></i> Submit Review (रिव्यू पोस्ट करें)
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right: Verified Customer Reviews Feed -->
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4" id="public-reviews-grid">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- CONTACT US & DIRECT INQUIRY SECTION                               -->
+        <!-- ================================================================= -->
+        <section id="contact-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Get In Touch</span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">सीधे संपर्क करें (Contact Us)</h3>
+                <p class="text-gray-400 text-sm mt-1">कस्टम पैकेज, लोकेशन शूट या किसी भी जानकारी के लिए कॉल करें, WhatsApp करें या संदेश भेजें</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Contact Cards -->
+                <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a id="contact-call-card" href="tel:+919026310085" class="bg-studio-card hover:border-amber-500/60 p-5 rounded-2xl border border-studio-border transition flex flex-col justify-between">
+                        <div class="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Direct Call (Adarsh Singh)</p>
+                            <p class="text-base font-extrabold text-white mt-0.5">+91 <span class="dynamic-studio-phone">9026310085</span></p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/919026310085" target="_blank" class="dynamic-whatsapp-link bg-studio-card hover:border-emerald-500/60 p-5 rounded-2xl border border-studio-border transition flex flex-col justify-between">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xl mb-3">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">WhatsApp Booking & Chat</p>
+                            <p class="text-base font-extrabold text-emerald-400 mt-0.5">+91 <span class="dynamic-studio-whatsapp">9026310085</span></p>
+                        </div>
+                    </a>
+
+                    <a href="mailto:thegymboyadarshsingh@gmail.com" class="dynamic-email-link bg-studio-card hover:border-amber-500/60 p-5 rounded-2xl border border-studio-border transition flex flex-col justify-between">
+                        <div class="w-11 h-11 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs text-gray-400">Official Email</p>
+                            <p class="text-xs sm:text-sm font-bold text-white mt-0.5 truncate dynamic-studio-email">thegymboyadarshsingh@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <div class="bg-studio-card p-5 rounded-2xl border border-studio-border flex flex-col justify-between">
+                        <div class="w-11 h-11 rounded-xl bg-red-500/15 text-red-400 flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Studio Address</p>
+                            <p class="text-sm font-bold text-white mt-0.5 dynamic-studio-address">Mankapur, District Gonda, Uttar Pradesh</p>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Row -->
+                    <a id="contact-youtube-link" href="https://youtube.com" target="_blank" class="bg-studio-card hover:border-red-500/60 p-4 rounded-2xl border border-studio-border transition flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-500 flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-[11px] text-gray-400">YouTube Channel</p>
+                            <p id="dynamic-youtube-name" class="text-sm font-bold text-white truncate">Crazy Music World</p>
+                        </div>
+                    </a>
+
+                    <a id="contact-instagram-link" href="https://instagram.com/adarshsinghofficial_" target="_blank" class="bg-studio-card hover:border-pink-500/60 p-4 rounded-2xl border border-studio-border transition flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-pink-600/20 text-pink-400 flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-[11px] text-gray-400">Instagram</p>
+                            <p id="dynamic-instagram-handle" class="text-sm font-bold text-white truncate">@adarshsinghofficial_</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Right Quick Inquiry Form -->
+                <div class="lg:col-span-6 bg-studio-card p-6 rounded-2xl border border-studio-border">
+                    <h4 class="text-lg font-bold text-white mb-1">संदेश भेजें (Quick Inquiry)</h4>
+                    <p class="text-xs text-gray-400 mb-4">अपना नंबर और सवाल लिखें, हमारी टीम जल्द संपर्क करेगी।</p>
+                    <form onsubmit="handleCustomerInquiry(event)" class="space-y-3.5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <input type="text" id="inq-name" required placeholder="आपका नाम *" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                            <input type="tel" id="inq-phone" required maxlength="10" placeholder="मोबाइल नंबर *" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                        </div>
+                        <textarea id="inq-message" rows="4" required placeholder="आपको किस इवेंट, शादी या म्यूजिक वीडियो शूट के बारे में जानकारी चाहिए? *" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none"></textarea>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message to Studio
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 2: PASSWORD-PROTECTED PERSONAL ADMIN DASHBOARD                   -->
+    <!-- ===================================================================== -->
+    <section id="admin-view" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Admin Top Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-studio-card p-5 rounded-2xl border border-amber-500/40 mb-6 shadow-xl">
+            <div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs font-bold"><i class="fa-solid fa-shield-check mr-1"></i>VERIFIED OWNER SESSION</span>
+                    <span id="cloud-sync-badge" class="px-2.5 py-0.5 rounded-md bg-blue-500/15 text-blue-300 border border-blue-500/30 text-xs font-bold flex items-center gap-1.5">
+                        <i id="cloud-sync-icon" class="fa-solid fa-cloud-arrow-up text-blue-400"></i>
+                        <span id="cloud-sync-text">Connecting Cloud...</span>
+                    </span>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-white mt-1.5">Adarsh Singh — Studio Admin Control</h2>
+                <p class="text-xs sm:text-sm text-gray-400 mt-1">MAA FILM'S STUDIO का सारा डेटा क्लाउड पर सुरक्षित है — फ़ोन फॉर्मेट होने के बाद भी पासवर्ड से लॉगिन करने पर सारा डेटा वापस मिल जाएगा।</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="forceCloudSyncNow()" id="force-sync-btn" class="px-3.5 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/40 text-xs sm:text-sm font-bold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate"></i> Sync Now
+                </button>
+                <button onclick="switchView('customer')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-gray-200 text-xs sm:text-sm font-semibold transition">
+                    <i class="fa-solid fa-eye mr-1"></i> कस्टमर साइट देखें
+                </button>
+                <button onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs sm:text-sm font-bold shadow transition">
+                    <i class="fa-solid fa-lock mr-1"></i> Lock & Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Analytics KPI Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="bg-studio-card p-5 rounded-2xl border border-studio-border">
+                <div class="flex items-center justify-between text-gray-400 text-xs sm:text-sm mb-2">
+                    <span>कुल बुकिंग (Bookings)</span>
+                    <i class="fa-solid fa-calendar-check text-amber-400 text-lg"></i>
+                </div>
+                <p id="stat-total-bookings" class="text-2xl sm:text-3xl font-extrabold text-white">0</p>
+            </div>
+            <div class="bg-studio-card p-5 rounded-2xl border border-studio-border">
+                <div class="flex items-center justify-between text-gray-400 text-xs sm:text-sm mb-2">
+                    <span>कुल कमाई (Revenue)</span>
+                    <i class="fa-solid fa-indian-rupee-sign text-emerald-400 text-lg"></i>
+                </div>
+                <p id="stat-total-revenue" class="text-2xl sm:text-3xl font-extrabold text-emerald-400">₹0</p>
+            </div>
+            <div class="bg-studio-card p-5 rounded-2xl border border-studio-border">
+                <div class="flex items-center justify-between text-gray-400 text-xs sm:text-sm mb-2">
+                    <span>कस्टमर रिव्यू (Reviews)</span>
+                    <i class="fa-solid fa-star text-amber-400 text-lg"></i>
+                </div>
+                <p id="stat-total-reviews" class="text-2xl sm:text-3xl font-extrabold text-amber-400">0</p>
+            </div>
+            <div class="bg-studio-card p-5 rounded-2xl border border-studio-border">
+                <div class="flex items-center justify-between text-gray-400 text-xs sm:text-sm mb-2">
+                    <span>स्टूडियो फॉलोअर्स (Followers)</span>
+                    <i class="fa-solid fa-bell text-pink-400 text-lg"></i>
+                </div>
+                <p id="stat-total-followers" class="text-2xl sm:text-3xl font-extrabold text-pink-400">128</p>
+            </div>
+        </div>
+
+        <!-- Admin Navigation Tabs -->
+        <div class="flex gap-2 border-b border-studio-border pb-3 mb-6 overflow-x-auto">
+            <button id="tab-bookings-btn" onclick="switchAdminTab('bookings')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 text-black whitespace-nowrap transition">
+                <i class="fa-solid fa-list-check mr-1.5"></i> कस्टमर बुकिंग्स
+            </button>
+            <button id="tab-services-btn" onclick="switchAdminTab('services')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-studio-card text-gray-300 hover:bg-slate-800 whitespace-nowrap transition">
+                <i class="fa-solid fa-tags mr-1.5"></i> सर्विस और प्राइस
+            </button>
+            <button id="tab-banner-btn" onclick="switchAdminTab('banner')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-studio-card text-gray-300 hover:bg-slate-800 whitespace-nowrap transition">
+                <i class="fa-solid fa-panorama mr-1.5 text-amber-400"></i> टॉप बैनर
+            </button>
+            <button id="tab-gallery-btn" onclick="switchAdminTab('gallery')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-studio-card text-gray-300 hover:bg-slate-800 whitespace-nowrap transition">
+                <i class="fa-solid fa-images mr-1.5 text-pink-400"></i> फोटो गैलरी
+            </button>
+            <button id="tab-offers-btn" onclick="switchAdminTab('offers')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-studio-card text-gray-300 hover:bg-slate-800 whitespace-nowrap transition">
+                <i class="fa-solid fa-bullhorn mr-1.5 text-amber-400"></i> ऑफर अलर्ट
+            </button>
+            <button id="tab-reviews-btn" onclick="switchAdminTab('reviews')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-studio-card text-gray-300 hover:bg-slate-800 whitespace-nowrap transition">
+                <i class="fa-solid fa-star mr-1.5 text-yellow-400"></i> रिव्यू व मैसेज
+            </button>
+            <button id="tab-settings-btn" onclick="switchAdminTab('settings')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-studio-card text-gray-300 hover:bg-slate-800 whitespace-nowrap transition">
+                <i class="fa-solid fa-key mr-1.5 text-emerald-400"></i> पासवर्ड व कॉन्टेक्ट
+            </button>
+        </div>
+
+        <!-- Admin Tab 1: Bookings Management -->
+        <div id="admin-tab-bookings" class="space-y-4">
+            <div class="flex flex-col sm:flex-row gap-3 justify-between">
+                <div class="relative flex-1 max-w-md">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
+                    <input type="text" id="booking-search" oninput="renderAdminBookings()" placeholder="कस्टमर का नाम, मोबाइल या Booking ID खोजें..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-studio-card border border-studio-border text-sm text-white focus:outline-none focus:border-amber-500">
+                </div>
+                <select id="booking-status-filter" onchange="renderAdminBookings()" class="px-4 py-2.5 rounded-xl bg-studio-card border border-studio-border text-sm text-white focus:outline-none focus:border-amber-500">
+                    <option value="ALL">सभी स्टेटस (All Status)</option>
+                    <option value="Confirmed">Confirmed (कन्फर्म)</option>
+                    <option value="Completed">Completed (पूरा हुआ)</option>
+                    <option value="Cancelled">Cancelled (रद्द)</option>
+                </select>
+            </div>
+
+            <div class="bg-studio-card rounded-2xl border border-studio-border overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-studio-dark text-gray-400 text-xs uppercase border-b border-studio-border">
+                                <th class="p-4">Booking ID & Date</th>
+                                <th class="p-4">कस्टमर डिटेल</th>
+                                <th class="p-4">सर्विस और लोकेशन</th>
+                                <th class="p-4">पेमेंट</th>
+                                <th class="p-4">स्टेटस</th>
+                                <th class="p-4 text-right">रसीद / WhatsApp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-bookings-tbody" class="divide-y divide-studio-border text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Tab 2: Top Banner Settings -->
+        <div id="admin-tab-banner" class="hidden space-y-6">
+            <div class="bg-studio-card p-5 sm:p-6 rounded-2xl border border-amber-500/30">
+                <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-panorama text-amber-400"></i> वेबसाइट के सबसे टॉप बैनर को मैनेज करें
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">यहाँ से आप अपने फ़ोन/कंप्यूटर से नई बैनर फोटो अपलोड कर सकते हैं या किसी फोटो को मुख्य (#1 Main) बैनर बना सकते हैं।</p>
+
+                <form onsubmit="handleAddBannerPhoto(event)" class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <div class="md:col-span-5">
+                        <label class="block text-xs text-gray-300 mb-1">नई बैनर फोटो चुनें (Device Upload) *</label>
+                        <input type="file" id="banner-file-input" accept="image/*" class="w-full px-3 py-2 rounded-xl bg-studio-dark border border-studio-border text-xs text-gray-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500 file:text-black cursor-pointer">
+                    </div>
+                    <div class="md:col-span-4">
+                        <label class="block text-xs text-gray-300 mb-1">बैनर टैग लाइन (Tagline)</label>
+                        <input type="text" id="banner-tag-input" placeholder="उदा. 4K Cinema Production & Gimbal Shoot" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="md:col-span-3 flex items-end">
+                        <button type="submit" id="upload-banner-btn" class="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm shadow transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Add Top Banner
+                        </button>
+                    </div>
+                    <div class="md:col-span-12">
+                        <label class="block text-xs text-gray-300 mb-1">बैनर पर दिखने वाला विवरण (Caption)</label>
+                        <input type="text" id="banner-caption-input" placeholder="उदा. Adarsh Singh (Certified Video Editor) — शादी और म्यूजिक वीडियो की प्रीमियम शूटिंग।" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="text-sm font-bold text-amber-400">वर्तमान टॉप बैनर स्लाइड्स (Active Top Banners)</h4>
+                    <button onclick="resetDefaultBanners()" class="text-xs text-gray-400 hover:text-amber-400 underline">Restore 4 Original Studio Banners</button>
+                </div>
+                <div id="admin-banners-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+            </div>
+        </div>
+
+        <!-- Admin Tab 3: Gallery Manager -->
+        <div id="admin-tab-gallery" class="hidden space-y-6">
+            <div class="bg-studio-card p-5 sm:p-6 rounded-2xl border border-pink-500/30">
+                <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up text-pink-400"></i> गैलरी में नई फोटो जोड़ें (Add New Photos)
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">अपने मोबाइल या कंप्यूटर से एक साथ कई फोटो चुनकर अपलोड करें।</p>
+
+                <form onsubmit="handleAddGalleryPhotos(event)" class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <div class="md:col-span-5">
+                        <label class="block text-xs text-gray-300 mb-1">फ़ोन / कंप्यूटर से फोटो चुनें *</label>
+                        <input type="file" id="gallery-file-input" accept="image/*" multiple class="w-full px-3 py-2 rounded-xl bg-studio-dark border border-studio-border text-xs text-gray-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-500 file:text-black cursor-pointer">
+                    </div>
+                    <div class="md:col-span-3">
+                        <label class="block text-xs text-gray-300 mb-1">कैटेगरी (Category)</label>
+                        <select id="gallery-category-input" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                            <option value="Wedding">Wedding Couple</option>
+                            <option value="Bridal Portrait">Bridal Portrait</option>
+                            <option value="Pre-Wedding">Pre-Wedding</option>
+                            <option value="Music Video">Music Video Shoot</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-4">
+                        <label class="block text-xs text-gray-300 mb-1">फोटो का शीर्षक (Title)</label>
+                        <input type="text" id="gallery-title-input" placeholder="उदा. Royal Bridal Portrait" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="md:col-span-9">
+                        <label class="block text-xs text-gray-400 mb-1">या फोटो का डायरेक्ट लिंक पेस्ट करें (Optional Image URL)</label>
+                        <input type="url" id="gallery-url-input" placeholder="https://example.com/photo.jpg" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-xs text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="md:col-span-3 flex items-end">
+                        <button type="submit" id="upload-gallery-btn" class="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm shadow transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Add to Gallery
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="text-sm font-bold text-amber-400">आपकी गैलरी की सभी तस्वीरें</h4>
+                    <button onclick="resetDefaultGallery()" class="text-xs text-gray-400 hover:text-amber-400 underline">Restore All 9 Original Photos</button>
+                </div>
+                <div id="admin-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
+            </div>
+        </div>
+
+        <!-- Admin Tab 4: Service & Price Manager -->
+        <div id="admin-tab-services" class="hidden space-y-6">
+            <div class="bg-studio-card p-5 sm:p-6 rounded-2xl border border-studio-border">
+                <h3 id="service-form-title" class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-amber-400"></i> नई सर्विस जोड़ें (Add New Service)
+                </h3>
+                <form id="admin-service-form" onsubmit="handleSaveService(event)" class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <input type="hidden" id="edit-service-id">
+                    <div class="md:col-span-5">
+                        <label class="block text-xs text-gray-400 mb-1">सर्विस का नाम (Service Name) *</label>
+                        <input type="text" id="service-name-input" required placeholder="उदा. Wedding Cinematic Package" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="md:col-span-3">
+                        <label class="block text-xs text-gray-400 mb-1">प्राइस ₹ (Price in INR) *</label>
+                        <input type="number" id="service-price-input" required min="100" placeholder="15000" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="md:col-span-4">
+                        <label class="block text-xs text-gray-400 mb-1">कैटेगरी (Category)</label>
+                        <select id="service-category-input" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                            <option value="wedding">Wedding & Pre-Wedding</option>
+                            <option value="music">Music Video / Album Shoot</option>
+                            <option value="event">Event / Birthday / Engagement</option>
+                            <option value="editing">4K Video Editing & Color Grading</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-9">
+                        <label class="block text-xs text-gray-400 mb-1">सर्विस विवरण (Camera, Gimbal, Deliverables आदि) *</label>
+                        <input type="text" id="service-desc-input" required placeholder="Sony Alpha 6400 + DJI Ronin RS 3 Gimbal + Full 4K Editing" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="md:col-span-3 flex items-end gap-2">
+                        <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm transition">
+                            <i class="fa-solid fa-save mr-1"></i> Save Service
+                        </button>
+                        <button type="button" id="cancel-edit-service-btn" onclick="resetServiceForm()" class="hidden py-2.5 px-3 rounded-xl bg-slate-700 text-white text-sm">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="admin-services-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <!-- Admin Tab 5: Send Offer Notification & Manage Followers -->
+        <div id="admin-tab-offers" class="hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-7 bg-studio-card p-5 sm:p-6 rounded-2xl border border-amber-500/30">
+                    <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-bullhorn text-amber-400"></i> सभी फॉलोअर्स को नया ऑफर नोटिफिकेशन भेजें
+                    </h3>
+                    <p class="text-xs text-gray-400 mb-4">ऑफर पब्लिश करते ही टॉप बैनर पर ऑफर लाइव हो जाएगा और फॉलोअर्स के फ़ोन पर नोटिफिकेशन चला जाएगा।</p>
+
+                    <form onsubmit="handlePublishOffer(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">ऑफर का शीर्षक *</label>
+                                <input type="text" id="offer-title-input" required placeholder="उदा. लगन / शादी स्पेशल डिस्काउंट" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">ऑफर प्राइस / छूट *</label>
+                                <input type="text" id="offer-badge-input" required placeholder="उदा. ₹3,000 OFF" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">किस सर्विस पर ऑफर है?</label>
+                                <select id="offer-service-select" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none"></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">ऑफर अंतिम तारीख *</label>
+                                <input type="date" id="offer-valid-input" required class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">ऑफर मैसेज *</label>
+                            <textarea id="offer-msg-input" rows="2" required placeholder="उदा. इस महीने बुकिंग करने पर पाएं Free Pre-Wedding Reel!" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Publish Offer & Send Phone Notification</span>
+                        </button>
+                    </form>
+
+                    <div class="mt-6 pt-5 border-t border-studio-border">
+                        <h4 class="text-sm font-bold text-amber-400 mb-3">लाइव ऑफर्स लिस्ट (Active Offers)</h4>
+                        <div id="admin-offers-list" class="space-y-2.5"></div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 bg-studio-card p-5 sm:p-6 rounded-2xl border border-studio-border">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-users text-amber-400"></i> फॉलोअर्स लिस्ट
+                        </h3>
+                        <span id="admin-follower-pill" class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold">128 Total</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mb-4">फॉलोअर्स को सीधे 1-क्लिक में WhatsApp पर ऑफर भेजें:</p>
+                    <div id="admin-followers-list" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Tab 6: Reviews & Customer Inquiries Moderation -->
+        <div id="admin-tab-reviews" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-7 bg-studio-card p-6 rounded-2xl border border-studio-border">
+                <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-star text-amber-400"></i> कस्टमर रिव्यू मैनेज करें (Manage Reviews)
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">कस्टमर्स द्वारा दिए गए सभी रिव्यू यहाँ दिखेंगे। आप किसी भी अवांछित रिव्यू को हटा सकते हैं।</p>
+                <div id="admin-reviews-list" class="space-y-3 max-h-[500px] overflow-y-auto pr-1"></div>
+            </div>
+
+            <div class="lg:col-span-5 bg-studio-card p-6 rounded-2xl border border-studio-border">
+                <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-envelope-open-text text-emerald-400"></i> कस्टमर के संदेश (Inquiries)
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">Contact Us फॉर्म से आए कस्टमर के सवाल:</p>
+                <div id="admin-inquiries-list" class="space-y-3 max-h-[500px] overflow-y-auto pr-1"></div>
+            </div>
+        </div>
+
+        <!-- Admin Tab 7: Password Security & Contact Settings -->
+        <div id="admin-tab-settings" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left: Studio Contact & Social Links -->
+            <div class="lg:col-span-7 bg-studio-card p-6 rounded-2xl border border-studio-border">
+                <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-address-card text-emerald-400"></i> अपना कॉन्टेक्ट नंबर, पता व UPI सेटिंग्स बदलें
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">यहाँ से सेव करते ही पूरी वेबसाइट और रसीद पर आपका नया नंबर व पता तुरंत अपडेट हो जाएगा।</p>
+                <form onsubmit="saveStudioSettings(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">कॉलिंग मोबाइल नंबर (10 अंक) *</label>
+                        <input type="tel" id="setting-phone-input" required maxlength="10" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">WhatsApp नंबर (10 अंक) *</label>
+                        <input type="tel" id="setting-whatsapp-input" required maxlength="10" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs text-gray-400 mb-1">ईमेल आईडी (Email Address) *</label>
+                        <input type="email" id="setting-email-input" required class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs text-gray-400 mb-1">स्टूडियो का पूरा पता (Studio Address) *</label>
+                        <input type="text" id="setting-address-input" required class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">आपकी UPI ID (पेमेंट के लिए) *</label>
+                        <input type="text" id="setting-upi-input" required class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-400 mb-1">YouTube Channel Name</label>
+                        <input type="text" id="setting-youtube-input" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs text-gray-400 mb-1">Instagram Handle</label>
+                        <input type="text" id="setting-instagram-input" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div class="sm:col-span-2 pt-1">
+                        <button type="submit" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm transition">
+                            <i class="fa-solid fa-check-circle mr-1"></i> Save Contact & Studio Settings
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right: Strong Admin Password Security Manager -->
+            <div class="lg:col-span-5 bg-studio-card p-6 rounded-2xl border border-amber-500/40">
+                <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-amber-400"></i> एडमिन पासवर्ड बदलें (Change Admin Password)
+                </h3>
+                <p class="text-xs text-gray-400 mb-4">सुरक्षा के लिए अपना मजबूत पासवर्ड सेट करें। केवल वही व्यक्ति एडमिन पैनल खोल पाएगा जिसे यह पासवर्ड पता होगा।</p>
+
+                <form onsubmit="handleChangeAdminPassword(event)" class="space-y-3.5">
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1">वर्तमान पासवर्ड (Current Password) *</label>
+                        <input type="password" id="current-admin-pass" required placeholder="वर्तमान पासवर्ड डालें" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1">नया पासवर्ड (New Password - कम से कम 6 अक्षर) *</label>
+                        <input type="password" id="new-admin-pass" required minlength="6" placeholder="नया पासवर्ड बनाएं" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1">नया पासवर्ड दोबारा डालें (Confirm New Password) *</label>
+                        <input type="password" id="confirm-admin-pass" required minlength="6" placeholder="नया पासवर्ड दोबारा लिखें" class="w-full px-3.5 py-2.5 rounded-xl bg-studio-dark border border-studio-border text-sm text-white focus:border-amber-500 focus:outline-none">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm shadow transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-key"></i> Update Admin Password
+                    </button>
+                </form>
+
+                <div class="mt-5 pt-4 border-t border-studio-border text-xs text-gray-400 space-y-1">
+                    <p><i class="fa-solid fa-circle-info text-amber-400 mr-1"></i> पासवर्ड भूल जाने पर आप अपने रजिस्टर्ड नंबर (<strong class="text-white dynamic-studio-phone">9026310085</strong>) या ईमेल वेरिफिकेशन से पासवर्ड रीसेट कर सकते हैं।</p>
+                </div>
+
+                <!-- Cloud & Offline JSON Backup/Restore Vault -->
+                <div class="mt-5 pt-4 border-t border-studio-border">
+                    <h4 class="text-sm font-bold text-blue-300 flex items-center gap-1.5 mb-1">
+                        <i class="fa-solid fa-database text-blue-400"></i> Cloud & Offline Safety Backup
+                    </h4>
+                    <p class="text-[11px] text-gray-400 mb-3">आपका डेटा ऑटोमैटिक क्लाउड पर सेव होता है। अतिरिक्त सुरक्षा के लिए आप पूरी फाइल बैकअप डाउनलोड या रीस्टोर भी कर सकते हैं:</p>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <button type="button" onclick="exportFullBackupJSON()" class="py-2.5 px-3 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/40 text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                            <i class="fa-solid fa-download"></i> Download Backup
+                        </button>
+                        <label class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer transition">
+                            <i class="fa-solid fa-upload"></i> Restore Backup
+                            <input type="file" accept=".json" onchange="importFullBackupJSON(event)" class="hidden">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- JAVASCRIPT APPLICATION LOGIC + REAL-TIME FIREBASE CLOUD PERSISTENCE   -->
+    <!-- ===================================================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Cloud Database State & References
+        let db = null;
+        let auth = null;
+        let cloudUser = null;
+        let isCloudReady = false;
+        let isApplyingRemoteSnapshot = false;
+        let cloudSaveTimer = null;
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'maa-films-studio-app';
+
+        function updateCloudStatusBadge(status, labelText) {
+            const badge = document.getElementById('cloud-sync-badge');
+            const icon = document.getElementById('cloud-sync-icon');
+            const text = document.getElementById('cloud-sync-text');
+            if (!badge || !icon || !text) return;
+
+            text.textContent = labelText;
+            if (status === 'synced') {
+                badge.className = 'px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5';
+                icon.className = 'fa-solid fa-cloud-check text-emerald-400';
+            } else if (status === 'syncing') {
+                badge.className = 'px-2.5 py-0.5 rounded-md bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold flex items-center gap-1.5';
+                icon.className = 'fa-solid fa-arrows-rotate fa-spin text-amber-400';
+            } else {
+                badge.className = 'px-2.5 py-0.5 rounded-md bg-blue-500/15 text-blue-300 border border-blue-500/30 text-xs font-bold flex items-center gap-1.5';
+                icon.className = 'fa-solid fa-cloud text-blue-400';
+            }
+        }
+
+        // Initialize Firebase Cloud & Authenticate First (RULE 3)
+        async function initFirebaseCloudSync() {
+            try {
+                if (typeof __firebase_config === 'undefined' || !__firebase_config) {
+                    updateCloudStatusBadge('local', 'Local Vault Active');
+                    return;
+                }
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    const cred = await signInWithCustomToken(auth, __initial_auth_token);
+                    cloudUser = cred.user;
+                } else {
+                    const cred = await signInAnonymously(auth);
+                    cloudUser = cred.user;
+                }
+
+                if (!cloudUser) return;
+                isCloudReady = true;
+
+                // Strict Rule 1 Path: /artifacts/{appId}/public/data/{collectionName}
+                const studioStateDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'studio_master', 'state_v1');
+                const mediaAssetsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'studio_master', 'media_v1');
+
+                // Initial Cloud Fetch (Auto-restores everything on a formatted/new phone)
+                const [stateSnap, mediaSnap] = await Promise.all([
+                    getDoc(studioStateDocRef),
+                    getDoc(mediaAssetsDocRef)
+                ]);
+
+                if (stateSnap.exists()) {
+                    applyCloudCoreState(stateSnap.data());
+                } else {
+                    await pushAllDataToCloud(true);
+                }
+
+                if (mediaSnap.exists()) {
+                    applyCloudMediaState(mediaSnap.data());
+                } else {
+                    await pushMediaDataToCloud();
+                }
+
+                // Real-time Listener so new bookings/reviews from any customer phone sync immediately
+                onSnapshot(studioStateDocRef, (snap) => {
+                    if (snap.exists() && !snap.metadata.hasPendingWrites) {
+                        applyCloudCoreState(snap.data());
+                    }
+                }, (err) => {
+                    console.warn('Cloud state listener notice:', err);
+                });
+
+                onSnapshot(mediaAssetsDocRef, (snap) => {
+                    if (snap.exists() && !snap.metadata.hasPendingWrites) {
+                        applyCloudMediaState(snap.data());
+                    }
+                }, (err) => {
+                    console.warn('Cloud media listener notice:', err);
+                });
+
+                const timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+                updateCloudStatusBadge('synced', `Cloud Synced (${timeStr})`);
+            } catch (error) {
+                console.warn('Cloud init fallback:', error);
+                updateCloudStatusBadge('local', 'Local Backup Mode');
+            }
+        }
+
+        function applyCloudCoreState(data) {
+            if (!data) return;
+            isApplyingRemoteSnapshot = true;
+            try {
+                if (Array.isArray(data.services) && data.services.length > 0) window.services = data.services;
+                if (Array.isArray(data.bookings)) window.bookings = data.bookings;
+                if (Array.isArray(data.customerReviews)) window.customerReviews = data.customerReviews;
+                if (Array.isArray(data.customerInquiries)) window.customerInquiries = data.customerInquiries;
+                if (data.studioSettings && typeof data.studioSettings === 'object') {
+                    window.studioSettings = { ...window.studioSettings, ...data.studioSettings };
+                }
+                if (Array.isArray(data.studioOffers)) window.studioOffers = data.studioOffers;
+                if (Array.isArray(data.studioFollowers)) window.studioFollowers = data.studioFollowers;
+                if (typeof data.totalFollowerCount === 'number') window.totalFollowerCount = data.totalFollowerCount;
+
+                // Mirror to local cache without re-triggering cloud write
+                window.saveLocalOnly();
+                window.refreshEntireUI();
+            } finally {
+                isApplyingRemoteSnapshot = false;
+            }
+        }
+
+        function applyCloudMediaState(data) {
+            if (!data) return;
+            isApplyingRemoteSnapshot = true;
+            try {
+                if (Array.isArray(data.topBanners) && data.topBanners.length > 0) {
+                    window.topBanners = data.topBanners;
+                }
+                if (Array.isArray(data.galleryPhotos) && data.galleryPhotos.length > 0) {
+                    window.galleryPhotos = data.galleryPhotos;
+                }
+                window.saveLocalOnly();
+                window.renderTopBanner();
+                window.renderPublicGallery();
+                if (window.isAdminAuthenticated) {
+                    window.renderAdminBannersList();
+                    window.renderAdminGalleryList();
+                }
+            } finally {
+                isApplyingRemoteSnapshot = false;
+            }
+        }
+
+        async function pushAllDataToCloud(silent = false) {
+            if (!isCloudReady || !cloudUser || !db) return;
+            if (!silent) updateCloudStatusBadge('syncing', 'Syncing to Cloud...');
+
+            try {
+                const studioStateDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'studio_master', 'state_v1');
+                await setDoc(studioStateDocRef, {
+                    services: window.services,
+                    bookings: window.bookings,
+                    customerReviews: window.customerReviews,
+                    customerInquiries: window.customerInquiries,
+                    studioSettings: window.studioSettings,
+                    studioOffers: window.studioOffers,
+                    studioFollowers: window.studioFollowers,
+                    totalFollowerCount: window.totalFollowerCount,
+                    updatedAt: new Date().toISOString()
+                });
+
+                await pushMediaDataToCloud();
+
+                const timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+                updateCloudStatusBadge('synced', `Cloud Synced (${timeStr})`);
+            } catch (err) {
+                console.warn('Cloud push error:', err);
+                updateCloudStatusBadge('local', 'Saved Locally');
+            }
+        }
+
+        async function pushMediaDataToCloud() {
+            if (!isCloudReady || !cloudUser || !db) return;
+            try {
+                const mediaAssetsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'studio_master', 'media_v1');
+                await setDoc(mediaAssetsDocRef, {
+                    topBanners: window.topBanners,
+                    galleryPhotos: window.galleryPhotos,
+                    updatedAt: new Date().toISOString()
+                });
+            } catch (err) {
+                console.warn('Media cloud sync size/network notice:', err);
+            }
+        }
+
+        window.scheduleCloudSync = function () {
+            if (isApplyingRemoteSnapshot) return;
+            if (cloudSaveTimer) clearTimeout(cloudSaveTimer);
+            updateCloudStatusBadge('syncing', 'Saving to Cloud...');
+            cloudSaveTimer = setTimeout(() => {
+                pushAllDataToCloud(false);
+            }, 600);
+        };
+
+        window.forceCloudSyncNow = async function () {
+            if (!window.isAdminAuthenticated) return;
+            const btn = document.getElementById('force-sync-btn');
+            if (btn) btn.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Syncing...`;
+
+            if (isCloudReady && cloudUser && db) {
+                await pushAllDataToCloud(false);
+                window.showToast('सारा डेटा सफलतापूर्वक क्लाउड पर सिंक हो गया है!');
+            } else {
+                window.saveLocalOnly();
+                window.showToast('डेटा सुरक्षित रूप से सेव कर दिया गया है!');
+            }
+
+            if (btn) btn.innerHTML = `<i class="fa-solid fa-rotate"></i> Sync Now`;
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initFirebaseCloudSync();
+        });
+    </script>
+
+    <script>
+        // Top Hero Cinema Production Banner Slides
+        const DEFAULT_TOP_BANNERS = [
+            {
+                id: 'ban-1',
+                imageUrl: '1000296744.jpg',
+                tag: '4K Cinema Rig & Ronin Gimbal Production',
+                caption: 'Adarsh Singh (Certified Video Editor) — पूर्ण सिनेमा रिग और प्रोफेशनल लाइटिंग सेटअप के साथ हाई-क्वालिटी शूटिंग।'
+            },
+            {
+                id: 'ban-2',
+                imageUrl: '1000296742.jpg',
+                tag: 'Music Video & Commercial Shoot',
+                caption: 'भोजपुरी व एल्बम म्यूजिक वीडियो, प्री-वेडिंग और कमर्शियल शूट के लिए स्मूथ गिम्बल सिनेमैटोग्राफी।'
+            },
+            {
+                id: 'ban-3',
+                imageUrl: '1000296739.jpg',
+                tag: 'DJI Ronin Gimbal & 4K Action',
+                caption: 'हर फ्रेम में सिनेमा जैसा अनुभव — MAA FILM\'S STUDIO (Owner: Late Ranjeet Singh).'
+            },
+            {
+                id: 'ban-4',
+                imageUrl: '1000296736.jpg',
+                tag: 'Wedding & Event Filmmaking',
+                caption: 'आपकी शादी और खास पलों को यादगार बनाने के लिए आज ही ऑनलाइन बुकिंग करें और तुरंत रसीद पाएं।'
+            }
+        ];
+
+        // 9 Gallery Images
+        const DEFAULT_GALLERY = [
+            { id: 'gal-1', title: 'Royal Garden Pre-Wedding Portrait', category: 'Pre-Wedding', imageUrl: '1000296781.jpg' },
+            { id: 'gal-2', title: 'Traditional Bride & Groom Studio Portrait', category: 'Wedding', imageUrl: '1000296779.jpg' },
+            { id: 'gal-3', title: 'Royal Reception Couple Portrait', category: 'Wedding', imageUrl: '1000296780.jpg' },
+            { id: 'gal-4', title: 'Intimate Wedding Ceremony Moment', category: 'Wedding', imageUrl: '1000296778.jpg' },
+            { id: 'gal-5', title: 'Classic Tuxedo & Red Lehenga Couple Shoot', category: 'Wedding', imageUrl: '1000296783.jpg' },
+            { id: 'gal-6', title: 'Golden Hour Sunset Couple Embrace', category: 'Pre-Wedding', imageUrl: '1000296775.jpg' },
+            { id: 'gal-7', title: 'Bridal Mehendi & Kaleere Frame', category: 'Bridal Portrait', imageUrl: '1000296777.jpg' },
+            { id: 'gal-8', title: 'Swag Bride Sunglasses Portrait', category: 'Bridal Portrait', imageUrl: '1000296776.jpg' },
+            { id: 'gal-9', title: 'Cinematic Stage Blue-Lit Wedding Shot', category: 'Wedding', imageUrl: '1000296773.jpg' }
+        ];
+
+        // Default Studio Services
+        const DEFAULT_SERVICES = [
+            {
+                id: 'srv-1',
+                name: 'Wedding Full Videography & Photography Package',
+                price: 25000,
+                category: 'wedding',
+                description: 'Sony Alpha 6400 + Canon 2000D + DJI Ronin RS 3 Gimbal, Full Cinematic Wedding Film, Traditional Video & 250+ Edited Photos.'
+            },
+            {
+                id: 'srv-2',
+                name: 'Bhojpuri / Album Music Video Shoot & 4K Editing',
+                price: 15000,
+                category: 'music',
+                description: '4K Cinematic Music Video Shoot with Gimbal, Outdoor/Indoor Lighting Setup, Color Grading & YouTube Master Export.'
+            },
+            {
+                id: 'srv-3',
+                name: 'Pre-Wedding Cinematic Shoot (Gimbal & 4K)',
+                price: 12000,
+                category: 'wedding',
+                description: 'Full-Day Cinematic Couple Shoot with DJI Ronin RS 3 Gimbal, Teaser Reel, Full 4K Song Video & 50 Retouched Photos.'
+            },
+            {
+                id: 'srv-4',
+                name: 'Engagement / Birthday / Event Photography & Video',
+                price: 8000,
+                category: 'event',
+                description: 'Complete Event Coverage (Ring Ceremony, Tilak, Birthday, Jagran) with HD Video Highlight & All Raw + Edited Photos.'
+            },
+            {
+                id: 'srv-5',
+                name: 'Professional Video Editing & Color Grading',
+                price: 3000,
+                category: 'editing',
+                description: 'By Adarsh Singh (Certified Video Editor) — Music Video, Wedding Teaser, Reels & YouTube 4K Color Grading.'
+            }
+        ];
+
+        // Default Bookings
+        const DEFAULT_BOOKINGS = [
+            {
+                bookingId: 'MFS-8492',
+                customerName: 'अमित कुमार पांडेय',
+                customerPhone: '9839124560',
+                eventDate: '2026-12-05',
+                location: 'मनकापुर, गोंडा (U.P.)',
+                serviceId: 'srv-1',
+                serviceName: 'Wedding Full Videography & Photography Package',
+                serviceDesc: 'Sony Alpha 6400 + Canon 2000D + DJI Ronin RS 3 Gimbal',
+                totalPrice: 25000,
+                paidAmount: 25000,
+                paymentMode: 'UPI QR / App (Full Paid)',
+                status: 'Confirmed',
+                createdAt: '22 Nov 2026, 04:15 PM'
+            },
+            {
+                bookingId: 'MFS-7310',
+                customerName: 'सूरज यादव (Singer)',
+                customerPhone: '9120457890',
+                eventDate: '2026-11-28',
+                location: 'अयोध्या / गोंडा हाईवे लोकेशन',
+                serviceId: 'srv-2',
+                serviceName: 'Bhojpuri / Album Music Video Shoot & 4K Editing',
+                serviceDesc: '4K Cinematic Music Video Shoot with Gimbal & Color Grading',
+                totalPrice: 15000,
+                paidAmount: 4500,
+                paymentMode: 'UPI QR / App (30% Advance)',
+                status: 'Confirmed',
+                createdAt: '23 Nov 2026, 11:30 AM'
+            }
+        ];
+
+        // Default Verified Customer Reviews
+        const DEFAULT_REVIEWS = [
+            {
+                id: 'rev-1',
+                name: 'विवेक तिवारी',
+                city: 'मनकापुर, गोंडा',
+                service: 'Wedding Photography & Video',
+                rating: 5,
+                comment: 'मेरी बहन की शादी की पूरी शूटिंग और 4K एडिटिंग Adarsh Singh जी ने बहुत शानदार की। गिम्बल शॉट्स और फोटो क्वालिटी लाजवाब है!',
+                date: '18 Nov 2026'
+            },
+            {
+                id: 'rev-2',
+                name: 'सूरज यादव (Singer)',
+                city: 'अयोध्या / गोंडा',
+                service: 'Music Video / Album Shoot',
+                rating: 5,
+                comment: 'मेरे नए भोजपुरी एल्बम सॉन्ग की शूटिंग और कलर ग्रेडिंग MAA FILM\'S STUDIO से हुई। बिल्कुल फिल्म जैसी क्वालिटी मिली।',
+                date: '20 Nov 2026'
+            },
+            {
+                id: 'rev-3',
+                name: 'प्रिया & अभिषेक',
+                city: 'लखनऊ / गोंडा',
+                service: 'Pre-Wedding Cinematic Shoot',
+                rating: 5,
+                comment: 'प्री-वेडिंग शूट का अनुभव बहुत बढ़िया रहा। ऑनलाइन बुकिंग और तुरंत रसीद मिलने से सब कुछ बहुत आसान और भरोसेमंद लगा।',
+                date: '21 Nov 2026'
+            },
+            {
+                id: 'rev-4',
+                name: 'राहुल वर्मा',
+                city: 'उतरौला, बलरामपुर',
+                service: '4K Video Editing',
+                rating: 5,
+                comment: 'Adarsh भाई की वीडियो एडिटिंग और कलर ग्रेडिंग स्पीड व क्वालिटी दोनों बेहतरीन हैं। समय पर डिलीवरी मिली।',
+                date: '22 Nov 2026'
+            }
+        ];
+
+        // App State attached to window for seamless Cloud + Local Sync
+        window.topBanners = JSON.parse(localStorage.getItem('mfs_top_banners')) || DEFAULT_TOP_BANNERS;
+        let currentBannerIndex = 0;
+        let bannerAutoTimer = null;
+
+        window.galleryPhotos = JSON.parse(localStorage.getItem('mfs_gallery')) || DEFAULT_GALLERY;
+        let currentGalleryFilter = 'ALL';
+        let currentLightboxIndex = 0;
+
+        window.services = JSON.parse(localStorage.getItem('mfs_services')) || DEFAULT_SERVICES;
+        window.bookings = JSON.parse(localStorage.getItem('mfs_bookings')) || DEFAULT_BOOKINGS;
+        window.customerReviews = JSON.parse(localStorage.getItem('mfs_reviews')) || DEFAULT_REVIEWS;
+        window.customerInquiries = JSON.parse(localStorage.getItem('mfs_inquiries')) || [];
+
+        window.studioSettings = JSON.parse(localStorage.getItem('mfs_settings')) || {
+            phone: '9026310085',
+            whatsapp: '9026310085',
+            email: 'thegymboyadarshsingh@gmail.com',
+            address: 'Mankapur, District Gonda, Uttar Pradesh',
+            upiId: '9026310085@ybl',
+            youtubeName: 'Crazy Music World',
+            instagramHandle: '@adarshsinghofficial_',
+            adminPassword: 'Adarsh@2026'
+        };
+
+        if (!window.studioSettings.adminPassword) {
+            window.studioSettings.adminPassword = 'Adarsh@2026';
+        }
+
+        // Offers & Followers State
+        const DEFAULT_OFFERS = [
+            {
+                id: 'off-1',
+                title: 'लगन / शादी स्पेशल महा-ऑफर!',
+                badge: '₹3,000 OFF + Free Reel',
+                serviceId: 'srv-1',
+                validTill: '2026-12-31',
+                message: 'Wedding Full Videography & Photography Package बुक करने पर पाएं ₹3,000 की सीधा छूट और Free Pre-Wedding Cinematic Reel!',
+                createdAt: 'Today'
+            }
+        ];
+        const DEFAULT_FOLLOWERS = [
+            { id: 'fol-1', name: 'रोहित वर्मा', phone: '9838451290', joinedAt: '20 Nov 2026' },
+            { id: 'fol-2', name: 'अंजलि मिश्रा', phone: '9140782341', joinedAt: '22 Nov 2026' }
+        ];
+
+        window.studioOffers = JSON.parse(localStorage.getItem('mfs_offers')) || DEFAULT_OFFERS;
+        window.studioFollowers = JSON.parse(localStorage.getItem('mfs_followers')) || DEFAULT_FOLLOWERS;
+        window.totalFollowerCount = Number(localStorage.getItem('mfs_follower_count')) || 128;
+        let isUserFollowing = localStorage.getItem('mfs_user_following') === 'true';
+
+        window.isAdminAuthenticated = false;
+        let selectedServiceForBooking = null;
+        let pendingBookingDraft = null;
+        let selectedPaymentMethod = 'UPI QR / App';
+        let selectedNewReviewRating = 5;
+
+        // Save to Local Cache Only (used when applying incoming Cloud snapshot)
+        window.saveLocalOnly = function () {
+            try {
+                localStorage.setItem('mfs_top_banners', JSON.stringify(window.topBanners));
+                localStorage.setItem('mfs_gallery', JSON.stringify(window.galleryPhotos));
+                localStorage.setItem('mfs_services', JSON.stringify(window.services));
+                localStorage.setItem('mfs_bookings', JSON.stringify(window.bookings));
+                localStorage.setItem('mfs_reviews', JSON.stringify(window.customerReviews));
+                localStorage.setItem('mfs_inquiries', JSON.stringify(window.customerInquiries));
+                localStorage.setItem('mfs_settings', JSON.stringify(window.studioSettings));
+                localStorage.setItem('mfs_offers', JSON.stringify(window.studioOffers));
+                localStorage.setItem('mfs_followers', JSON.stringify(window.studioFollowers));
+                localStorage.setItem('mfs_follower_count', String(window.totalFollowerCount));
+                localStorage.setItem('mfs_user_following', String(isUserFollowing));
+            } catch (e) {
+                console.warn('Local cache storage full:', e);
+            }
+        };
+
+        // Save to LocalStorage AND Trigger Real-Time Cloud Sync
+        function persistData() {
+            window.saveLocalOnly();
+            if (typeof window.scheduleCloudSync === 'function') {
+                window.scheduleCloudSync();
+            }
+        }
+
+        // Refresh all UI sections after Cloud Restore or Backup Import
+        window.refreshEntireUI = function () {
+            applyContactDetails();
+            renderTopBanner();
+            renderPublicGallery();
+            renderServices();
+            renderPublicReviews();
+            updateFollowAndOfferUI();
+            if (window.isAdminAuthenticated) {
+                updateAdminDashboard();
+                renderAdminBannersList();
+                renderAdminOffersAndFollowers();
+                renderAdminReviewsList();
+                renderAdminInquiries();
+            }
+        };
+
+        // Download Full JSON Backup File (Extra Offline Safety)
+        function exportFullBackupJSON() {
+            if (!window.isAdminAuthenticated) return;
+            const backupPayload = {
+                studio: "MAA FILM'S STUDIO",
+                exportedAt: new Date().toISOString(),
+                services: window.services,
+                bookings: window.bookings,
+                customerReviews: window.customerReviews,
+                customerInquiries: window.customerInquiries,
+                studioSettings: window.studioSettings,
+                studioOffers: window.studioOffers,
+                studioFollowers: window.studioFollowers,
+                totalFollowerCount: window.totalFollowerCount,
+                topBanners: window.topBanners,
+                galleryPhotos: window.galleryPhotos
+            };
+            const blob = new Blob([JSON.stringify(backupPayload, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `MAA_FILMS_STUDIO_BACKUP_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('पूरा डेटा बैकअप फाइल डाउनलोड हो गया है!');
+        }
+
+        // Restore Full JSON Backup File
+        function importFullBackupJSON(event) {
+            if (!window.isAdminAuthenticated) return;
+            const file = event.target.files?.[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (Array.isArray(parsed.services)) window.services = parsed.services;
+                    if (Array.isArray(parsed.bookings)) window.bookings = parsed.bookings;
+                    if (Array.isArray(parsed.customerReviews)) window.customerReviews = parsed.customerReviews;
+                    if (Array.isArray(parsed.customerInquiries)) window.customerInquiries = parsed.customerInquiries;
+                    if (parsed.studioSettings) window.studioSettings = { ...window.studioSettings, ...parsed.studioSettings };
+                    if (Array.isArray(parsed.studioOffers)) window.studioOffers = parsed.studioOffers;
+                    if (Array.isArray(parsed.studioFollowers)) window.studioFollowers = parsed.studioFollowers;
+                    if (typeof parsed.totalFollowerCount === 'number') window.totalFollowerCount = parsed.totalFollowerCount;
+                    if (Array.isArray(parsed.topBanners) && parsed.topBanners.length > 0) window.topBanners = parsed.topBanners;
+                    if (Array.isArray(parsed.galleryPhotos) && parsed.galleryPhotos.length > 0) window.galleryPhotos = parsed.galleryPhotos;
+
+                    persistData();
+                    window.refreshEntireUI();
+                    showToast('बैकअप फाइल से सारा डेटा सफलतापूर्वक रीस्टोर और क्लाउड सिंक हो गया!');
+                } catch (err) {
+                    showToast('अमान्य बैकअप फाइल! कृपया सही JSON बैकअप चुनें।', 'error');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        // =====================================================================
+        // STRICT PASSWORD-PROTECTED ADMIN SECURITY SYSTEM
+        // =====================================================================
+        function handleAdminNavClick() {
+            if (window.isAdminAuthenticated) {
+                switchView('admin');
+            } else {
+                showLoginBox();
+                document.getElementById('admin-password-input').value = '';
+                document.getElementById('admin-login-error').classList.add('hidden');
+                document.getElementById('admin-pin-modal').classList.remove('hidden');
+            }
+        }
+
+        function toggleAdminPassVisibility() {
+            const input = document.getElementById('admin-password-input');
+            const icon = document.getElementById('pass-eye-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fa-solid fa-eye';
+            }
+        }
+
+        function verifyAdminPassword(e) {
+            e.preventDefault();
+            const enteredPass = document.getElementById('admin-password-input').value;
+            const errorBox = document.getElementById('admin-login-error');
+
+            if (enteredPass === studioSettings.adminPassword) {
+                isAdminAuthenticated = true;
+                errorBox.classList.add('hidden');
+                closeModal('admin-pin-modal');
+                switchView('admin');
+                updateAdminLockIcon();
+                showToast('स्वागत है Adarsh Singh! Admin Control Panel अनलॉक हो गया है।');
+            } else {
+                errorBox.classList.remove('hidden');
+                showToast('गलत एडमिन पासवर्ड! Access Denied.', 'error');
+            }
+        }
+
+        function showForgotPasswordBox() {
+            document.getElementById('admin-login-box').classList.add('hidden');
+            document.getElementById('admin-forgot-box').classList.remove('hidden');
+        }
+
+        function showLoginBox() {
+            document.getElementById('admin-forgot-box').classList.add('hidden');
+            document.getElementById('admin-login-box').classList.remove('hidden');
+        }
+
+        function handleResetForgottenPassword(e) {
+            e.preventDefault();
+            const identity = document.getElementById('recovery-identity-input').value.trim().toLowerCase();
+            const newPass = document.getElementById('recovery-new-pass').value;
+
+            const validPhone = studioSettings.phone.toLowerCase();
+            const validEmail = studioSettings.email.toLowerCase();
+
+            if (identity === validPhone || identity === validEmail) {
+                studioSettings.adminPassword = newPass;
+                persistData();
+                isAdminAuthenticated = true;
+                closeModal('admin-pin-modal');
+                switchView('admin');
+                updateAdminLockIcon();
+                showToast('वेरिफिकेशन सफल! नया एडमिन पासवर्ड सेव हो गया है।');
+            } else {
+                showToast('मोबाइल नंबर या ईमेल रिकॉर्ड से मेल नहीं खाया!', 'error');
+            }
+        }
+
+        function handleChangeAdminPassword(e) {
+            e.preventDefault();
+            if (!isAdminAuthenticated) return;
+
+            const currentPass = document.getElementById('current-admin-pass').value;
+            const newPass = document.getElementById('new-admin-pass').value;
+            const confirmPass = document.getElementById('confirm-admin-pass').value;
+
+            if (currentPass !== studioSettings.adminPassword) {
+                showToast('वर्तमान पासवर्ड (Current Password) गलत है!', 'error');
+                return;
+            }
+            if (newPass.length < 6) {
+                showToast('नया पासवर्ड कम से कम 6 अक्षरों का होना चाहिए।', 'error');
+                return;
+            }
+            if (newPass !== confirmPass) {
+                showToast('नया पासवर्ड और Confirm Password मेल नहीं खा रहे हैं!', 'error');
+                return;
+            }
+
+            studioSettings.adminPassword = newPass;
+            persistData();
+            e.target.reset();
+            showToast('आपका एडमिन पासवर्ड सफलतापूर्वक बदल दिया गया है!');
+        }
+
+        function logoutAdmin() {
+            isAdminAuthenticated = false;
+            updateAdminLockIcon();
+            switchView('customer');
+            showToast('Admin Dashboard सुरक्षित रूप से लॉक कर दिया गया है।');
+        }
+
+        function updateAdminLockIcon() {
+            const btn = document.getElementById('nav-admin-btn');
+            const icon = document.getElementById('admin-nav-lock-icon');
+            if (!btn || !icon) return;
+            if (isAdminAuthenticated) {
+                btn.className = 'w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-600/20 text-emerald-400 border border-emerald-500/50 transition flex items-center justify-center';
+                icon.className = 'fa-solid fa-unlock text-xs sm:text-sm';
+                btn.title = 'Admin Dashboard (Unlocked)';
+            } else {
+                btn.className = 'w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-studio-card hover:bg-slate-800 text-gray-400 hover:text-amber-400 border border-studio-border transition flex items-center justify-center';
+                icon.className = 'fa-solid fa-lock text-xs sm:text-sm';
+                btn.title = 'Staff / Owner Login';
+            }
+        }
+
+        // =====================================================================
+        // CUSTOMER REVIEWS & RATING SYSTEM
+        // =====================================================================
+        function setReviewRating(rating) {
+            selectedNewReviewRating = rating;
+            const labels = {
+                1: '1 / 5 Poor',
+                2: '2 / 5 Fair',
+                3: '3 / 5 Good',
+                4: '4 / 5 Very Good',
+                5: '5 / 5 Excellent'
+            };
+            document.getElementById('selected-rating-label').textContent = labels[rating] || '5 / 5 Excellent';
+
+            const buttons = document.querySelectorAll('#star-selector .star-btn');
+            buttons.forEach((btn, idx) => {
+                if (idx < rating) {
+                    btn.className = 'star-btn text-amber-400 hover:scale-110 transition';
+                } else {
+                    btn.className = 'star-btn text-gray-600 hover:scale-110 transition';
+                }
+            });
+        }
+
+        function handleCustomerReviewSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('rev-name').value.trim();
+            const city = document.getElementById('rev-city').value.trim();
+            const service = document.getElementById('rev-service').value;
+            const comment = document.getElementById('rev-comment').value.trim();
+
+            const today = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            customerReviews.unshift({
+                id: 'rev-' + Date.now(),
+                name,
+                city,
+                service,
+                rating: selectedNewReviewRating,
+                comment,
+                date: today
+            });
+
+            persistData();
+            renderPublicReviews();
+            e.target.reset();
+            setReviewRating(5);
+            showToast('धन्यवाद! आपका रिव्यू और रेटिंग वेबसाइट पर लाइव हो गया है।');
+        }
+
+        function renderPublicReviews() {
+            const grid = document.getElementById('public-reviews-grid');
+            if (!grid) return;
+
+            const total = customerReviews.length;
+            const avg = total > 0
+                ? (customerReviews.reduce((sum, r) => sum + Number(r.rating || 5), 0) / total).toFixed(1)
+                : '5.0';
+
+            const heroAvg = document.getElementById('hero-avg-rating');
+            const heroCount = document.getElementById('hero-review-count');
+            const secAvg = document.getElementById('section-avg-rating');
+            const secTotal = document.getElementById('section-review-total');
+
+            if (heroAvg) heroAvg.textContent = `${avg} / 5.0 ★`;
+            if (heroCount) heroCount.textContent = `${total} Verified Client Reviews`;
+            if (secAvg) secAvg.textContent = avg;
+            if (secTotal) secTotal.textContent = total;
+
+            if (total === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-gray-400 py-8">अभी तक कोई रिव्यू नहीं है। सबसे पहले अपना रिव्यू दें!</p>`;
+                return;
+            }
+
+            grid.innerHTML = customerReviews.map(rev => {
+                const starsHtml = Array.from({ length: 5 }, (_, i) =>
+                    `<i class="fa-solid fa-star ${i < rev.rating ? 'text-amber-400' : 'text-gray-700'} text-xs"></i>`
+                ).join('');
+
+                return `
+                <div class="bg-studio-card p-5 rounded-2xl border border-studio-border flex flex-col justify-between gap-3">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <div class="flex items-center gap-1">${starsHtml}</div>
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold">
+                                <i class="fa-solid fa-circle-check mr-0.5"></i> Verified Client
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-gray-200 leading-relaxed">"${rev.comment}"</p>
+                    </div>
+                    <div class="pt-3 border-t border-studio-border flex items-center justify-between text-xs">
+                        <div>
+                            <p class="font-bold text-white">${rev.name}</p>
+                            <p class="text-[11px] text-gray-400">${rev.city} • <span class="text-amber-400">${rev.service}</span></p>
+                        </div>
+                        <span class="text-[11px] text-gray-500">${rev.date}</span>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function renderAdminReviewsList() {
+            const list = document.getElementById('admin-reviews-list');
+            if (!list) return;
+            if (customerReviews.length === 0) {
+                list.innerHTML = `<p class="text-xs text-gray-400">कोई रिव्यू उपलब्ध नहीं है।</p>`;
+                return;
+            }
+            list.innerHTML = customerReviews.map(rev => `
+                <div class="p-3.5 rounded-xl bg-studio-dark border border-studio-border flex items-start justify-between gap-3">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <p class="text-sm font-bold text-white">${rev.name}</p>
+                            <span class="text-xs text-amber-400 font-bold">${rev.rating} ★</span>
+                            <span class="text-[11px] text-gray-400">(${rev.city})</span>
+                        </div>
+                        <p class="text-[11px] text-amber-400/80">${rev.service} • ${rev.date}</p>
+                        <p class="text-xs text-gray-300 mt-1">${rev.comment}</p>
+                    </div>
+                    <button onclick="deleteCustomerReview('${rev.id}')" class="p-2 rounded-lg bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs transition shrink-0" title="Delete Review">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function deleteCustomerReview(revId) {
+            if (!isAdminAuthenticated) return;
+            customerReviews = customerReviews.filter(r => r.id !== revId);
+            persistData();
+            renderAdminReviewsList();
+            renderPublicReviews();
+            updateAdminDashboard();
+            showToast('रिव्यू हटा दिया गया है।');
+        }
+
+        // =====================================================================
+        // TOP CINEMATIC HERO BANNER SLIDER & ADMIN BANNER MANAGER
+        // =====================================================================
+        function renderTopBanner() {
+            const slidesContainer = document.getElementById('top-banner-slides');
+            const dotsContainer = document.getElementById('top-banner-dots');
+            if (!slidesContainer || topBanners.length === 0) return;
+
+            if (currentBannerIndex >= topBanners.length) currentBannerIndex = 0;
+
+            slidesContainer.innerHTML = topBanners.map((ban, idx) => `
+                <div class="absolute inset-0 transition-opacity duration-700 ease-in-out ${idx === currentBannerIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}">
+                    <img src="${ban.imageUrl}" alt="MAA FILM'S STUDIO Banner ${idx + 1}"
+                         onerror="this.src='https://placehold.co/1600x700/0B0F19/F59E0B?text=MAA+FILMS+STUDIO'"
+                         class="w-full h-full object-cover object-center">
+                </div>
+            `).join('');
+
+            const activeSlide = topBanners[currentBannerIndex];
+            const tagEl = document.getElementById('banner-slide-tag');
+            const capEl = document.getElementById('banner-slide-caption');
+            if (tagEl) tagEl.textContent = activeSlide.tag || '4K Cinema Production';
+            if (capEl) capEl.textContent = activeSlide.caption || '';
+
+            dotsContainer.innerHTML = topBanners.map((_, idx) => `
+                <button onclick="goToBannerSlide(${idx})" aria-label="Slide ${idx + 1}"
+                        class="h-2.5 rounded-full transition-all ${idx === currentBannerIndex ? 'w-8 bg-amber-400' : 'w-2.5 bg-white/50 hover:bg-white'}"></button>
+            `).join('');
+        }
+
+        function changeBannerSlide(step) {
+            if (topBanners.length === 0) return;
+            currentBannerIndex = (currentBannerIndex + step + topBanners.length) % topBanners.length;
+            renderTopBanner();
+            restartBannerAutoSlide();
+        }
+
+        function goToBannerSlide(index) {
+            currentBannerIndex = index;
+            renderTopBanner();
+            restartBannerAutoSlide();
+        }
+
+        function restartBannerAutoSlide() {
+            if (bannerAutoTimer) clearInterval(bannerAutoTimer);
+            bannerAutoTimer = setInterval(() => {
+                if (topBanners.length > 1) {
+                    currentBannerIndex = (currentBannerIndex + 1) % topBanners.length;
+                    renderTopBanner();
+                }
+            }, 4500);
+        }
+
+        async function handleAddBannerPhoto(e) {
+            e.preventDefault();
+            if (!isAdminAuthenticated) return;
+            const fileInput = document.getElementById('banner-file-input');
+            const tag = document.getElementById('banner-tag-input').value.trim() || '4K Cinema Rig & Ronin Gimbal Production';
+            const caption = document.getElementById('banner-caption-input').value.trim() || 'Adarsh Singh (Certified Video Editor) — शादी और म्यूजिक वीडियो की प्रीमियम शूटिंग।';
+
+            if (!fileInput.files || fileInput.files.length === 0) {
+                showToast('कृपया अपने फ़ोन या कंप्यूटर से बैनर फोटो चुनें।', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('upload-banner-btn');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Uploading...`;
+
+            try {
+                const compressedUrl = await compressImageFile(fileInput.files[0], 1400, 0.82);
+                topBanners.unshift({
+                    id: 'ban-' + Date.now(),
+                    imageUrl: compressedUrl,
+                    tag,
+                    caption
+                });
+                currentBannerIndex = 0;
+                persistData();
+                renderTopBanner();
+                renderAdminBannersList();
+                e.target.reset();
+                showToast('नई टॉप बैनर फोटो वेबसाइट पर सबसे ऊपर लग गई है!');
+            } catch (err) {
+                showToast('बैनर अपलोड करने में समस्या आई।', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Add Top Banner`;
+            }
+        }
+
+        function renderAdminBannersList() {
+            const grid = document.getElementById('admin-banners-grid');
+            if (!grid) return;
+
+            grid.innerHTML = topBanners.map((ban, idx) => `
+                <div class="bg-studio-dark rounded-xl overflow-hidden border ${idx === 0 ? 'border-amber-500' : 'border-studio-border'} flex flex-col justify-between">
+                    <div class="relative aspect-video bg-black overflow-hidden">
+                        <img src="${ban.imageUrl}" alt="Banner ${idx + 1}" class="w-full h-full object-cover">
+                        ${idx === 0 ? `<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-amber-500 text-black text-[10px] font-black">MAIN #1</span>` : `<span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/75 text-white text-[10px] font-bold">Slide #${idx + 1}</span>`}
+                        <button onclick="deleteBannerPhoto('${ban.id}')" class="absolute top-2 right-2 w-7 h-7 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs flex items-center justify-center shadow" title="Remove Banner">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="p-3 space-y-2">
+                        <p class="text-xs font-bold text-amber-400 truncate">${ban.tag}</p>
+                        <div class="flex items-center justify-between gap-1 pt-1">
+                            ${idx !== 0 ? `<button onclick="makeMainBanner(${idx})" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-black text-[11px] font-bold transition">Set as #1 Main</button>` : `<span class="text-[11px] text-emerald-400 font-semibold"><i class="fa-solid fa-check-circle"></i> First Slide</span>`}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function makeMainBanner(index) {
+            if (!isAdminAuthenticated || index <= 0 || index >= topBanners.length) return;
+            const [selected] = topBanners.splice(index, 1);
+            topBanners.unshift(selected);
+            currentBannerIndex = 0;
+            persistData();
+            renderTopBanner();
+            renderAdminBannersList();
+            showToast('यह फोटो अब सबसे पहले मुख्य बैनर पर दिखेगी!');
+        }
+
+        function deleteBannerPhoto(banId) {
+            if (!isAdminAuthenticated) return;
+            if (topBanners.length <= 1) {
+                showToast('कम से कम 1 टॉप बैनर फोटो रखना आवश्यक है।', 'error');
+                return;
+            }
+            topBanners = topBanners.filter(b => b.id !== banId);
+            currentBannerIndex = 0;
+            persistData();
+            renderTopBanner();
+            renderAdminBannersList();
+            showToast('बैनर स्लाइड हटा दी गई है।');
+        }
+
+        function resetDefaultBanners() {
+            if (!isAdminAuthenticated) return;
+            topBanners = [...DEFAULT_TOP_BANNERS];
+            currentBannerIndex = 0;
+            persistData();
+            renderTopBanner();
+            renderAdminBannersList();
+            showToast('सभी 4 ओरिजिनल सिनेमा बैनर वापस लगा दिए गए हैं!');
+        }
+
+        // Apply Editable Contact Details Across Entire Site
+        function applyContactDetails() {
+            document.querySelectorAll('.dynamic-studio-phone').forEach(el => el.textContent = studioSettings.phone);
+            document.querySelectorAll('.dynamic-studio-whatsapp').forEach(el => el.textContent = studioSettings.whatsapp);
+            document.querySelectorAll('.dynamic-studio-email').forEach(el => el.textContent = studioSettings.email);
+            document.querySelectorAll('.dynamic-studio-address').forEach(el => el.textContent = studioSettings.address);
+            document.querySelectorAll('.dynamic-upi-id').forEach(el => el.textContent = studioSettings.upiId);
+
+            const ytName = document.getElementById('dynamic-youtube-name');
+            const igHandle = document.getElementById('dynamic-instagram-handle');
+            if (ytName) ytName.textContent = studioSettings.youtubeName || 'Crazy Music World';
+            if (igHandle) igHandle.textContent = studioSettings.instagramHandle || '@adarshsinghofficial_';
+
+            const callCard = document.getElementById('contact-call-card');
+            if (callCard) callCard.href = `tel:+91${studioSettings.phone}`;
+
+            document.querySelectorAll('.dynamic-whatsapp-link').forEach(el => {
+                el.href = `https://wa.me/91${studioSettings.whatsapp}`;
+            });
+            document.querySelectorAll('.dynamic-email-link').forEach(el => {
+                el.href = `mailto:${studioSettings.email}`;
+            });
+        }
+
+        // =====================================================================
+        // GALLERY RENDERING, LIGHTBOX & ADMIN PHOTO UPLOAD
+        // =====================================================================
+        function filterGallery(category) {
+            currentGalleryFilter = category;
+            document.querySelectorAll('.gal-filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === category) {
+                    btn.className = 'gal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-black transition';
+                } else {
+                    btn.className = 'gal-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-studio-card text-gray-300 hover:bg-slate-800 border border-studio-border transition';
+                }
+            });
+            renderPublicGallery();
+        }
+
+        function renderPublicGallery() {
+            const grid = document.getElementById('public-gallery-grid');
+            const filtered = currentGalleryFilter === 'ALL'
+                ? galleryPhotos
+                : galleryPhotos.filter(p => p.category === currentGalleryFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-gray-400 py-8">इस कैटेगरी में अभी कोई फोटो उपलब्ध नहीं है।</p>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map((photo) => `
+                <div class="group relative bg-studio-card rounded-2xl overflow-hidden border border-studio-border hover:border-amber-500/70 shadow-lg transition-all duration-300">
+                    <div class="aspect-[4/5] w-full overflow-hidden bg-slate-900 cursor-pointer" onclick="openLightbox('${photo.id}')">
+                        <img src="${photo.imageUrl}" alt="${photo.title}" loading="lazy"
+                             onerror="this.src='https://placehold.co/600x750/131926/F59E0B?text=MAA+FILMS+STUDIO'"
+                             class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                    </div>
+
+                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-4 pt-12 flex items-end justify-between gap-2">
+                        <div class="cursor-pointer" onclick="openLightbox('${photo.id}')">
+                            <span class="px-2 py-0.5 rounded bg-amber-500/25 border border-amber-500/40 text-amber-300 text-[10px] font-bold uppercase">${photo.category}</span>
+                            <h4 class="text-white font-bold text-sm mt-1 line-clamp-1">${photo.title}</h4>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button onclick="openLightbox('${photo.id}')" class="w-9 h-9 rounded-xl bg-slate-800/90 hover:bg-amber-500 hover:text-black text-white flex items-center justify-center text-xs transition" title="Full Screen">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button onclick="openBookingModal('${services[0].id}')" class="px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs transition">
+                                Book Shoot
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openLightbox(photoId) {
+            const idx = galleryPhotos.findIndex(p => p.id === photoId);
+            if (idx === -1) return;
+            currentLightboxIndex = idx;
+            updateLightboxContent();
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function updateLightboxContent() {
+            const photo = galleryPhotos[currentLightboxIndex];
+            if (!photo) return;
+            document.getElementById('lightbox-img').src = photo.imageUrl;
+            document.getElementById('lightbox-cat').textContent = photo.category;
+            document.getElementById('lightbox-title').textContent = photo.title;
+        }
+
+        function navigateLightbox(step) {
+            if (galleryPhotos.length === 0) return;
+            currentLightboxIndex = (currentLightboxIndex + step + galleryPhotos.length) % galleryPhotos.length;
+            updateLightboxContent();
+        }
+
+        function compressImageFile(file, maxWidth = 900, quality = 0.78) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.onerror = reject;
+                    img.src = event.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function handleAddGalleryPhotos(e) {
+            e.preventDefault();
+            if (!isAdminAuthenticated) return;
+            const fileInput = document.getElementById('gallery-file-input');
+            const urlInput = document.getElementById('gallery-url-input').value.trim();
+            const category = document.getElementById('gallery-category-input').value;
+            const customTitle = document.getElementById('gallery-title-input').value.trim();
+
+            if ((!fileInput.files || fileInput.files.length === 0) && !urlInput) {
+                showToast('कृपया अपने फ़ोन/कंप्यूटर से फोटो चुनें या Image URL डालें।', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('upload-gallery-btn');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Uploading...`;
+
+            try {
+                let addedCount = 0;
+
+                if (fileInput.files && fileInput.files.length > 0) {
+                    for (let i = 0; i < fileInput.files.length; i++) {
+                        const file = fileInput.files[i];
+                        const compressedDataUrl = await compressImageFile(file);
+                        const title = customTitle
+                            ? (fileInput.files.length > 1 ? `${customTitle} #${i + 1}` : customTitle)
+                            : `${category} Shoot — MAA FILM'S STUDIO`;
+
+                        galleryPhotos.unshift({
+                            id: 'gal-' + Date.now() + '-' + i,
+                            title,
+                            category,
+                            imageUrl: compressedDataUrl
+                        });
+                        addedCount++;
+                    }
+                }
+
+                if (urlInput) {
+                    galleryPhotos.unshift({
+                        id: 'gal-url-' + Date.now(),
+                        title: customTitle || `${category} Portfolio`,
+                        category,
+                        imageUrl: urlInput
+                    });
+                    addedCount++;
+                }
+
+                persistData();
+                renderPublicGallery();
+                renderAdminGalleryList();
+                updateAdminDashboard();
+
+                fileInput.value = '';
+                document.getElementById('gallery-url-input').value = '';
+                document.getElementById('gallery-title-input').value = '';
+                showToast(`${addedCount} नई फोटो आपकी गैलरी में जुड़ गई हैं!`);
+            } catch (err) {
+                showToast('फोटो अपलोड करने में समस्या आई।', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-plus"></i> Add to Gallery`;
+            }
+        }
+
+        function renderAdminGalleryList() {
+            const grid = document.getElementById('admin-gallery-grid');
+            if (!grid) return;
+
+            grid.innerHTML = galleryPhotos.map((photo, index) => `
+                <div class="bg-studio-dark rounded-xl overflow-hidden border border-studio-border flex flex-col justify-between group">
+                    <div class="relative aspect-[4/5] bg-black overflow-hidden">
+                        <img src="${photo.imageUrl}" alt="${photo.title}" class="w-full h-full object-cover object-top">
+                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/80 text-amber-400 text-[10px] font-bold">${photo.category}</span>
+                        <button onclick="deleteGalleryPhoto('${photo.id}')" class="absolute top-2 right-2 w-7 h-7 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs flex items-center justify-center shadow" title="Delete Photo">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="p-2.5 flex items-center justify-between gap-1">
+                        <p class="text-xs font-semibold text-gray-200 truncate">${photo.title}</p>
+                        <div class="flex items-center gap-1 shrink-0">
+                            ${index > 0 ? `<button onclick="moveGalleryPhoto(${index}, -1)" class="p-1 rounded bg-slate-800 hover:bg-amber-500 hover:text-black text-gray-300 text-[10px]" title="Move Left"><i class="fa-solid fa-arrow-left"></i></button>` : ''}
+                            ${index < galleryPhotos.length - 1 ? `<button onclick="moveGalleryPhoto(${index}, 1)" class="p-1 rounded bg-slate-800 hover:bg-amber-500 hover:text-black text-gray-300 text-[10px]" title="Move Right"><i class="fa-solid fa-arrow-right"></i></button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function moveGalleryPhoto(index, direction) {
+            if (!isAdminAuthenticated) return;
+            const targetIndex = index + direction;
+            if (targetIndex < 0 || targetIndex >= galleryPhotos.length) return;
+            const temp = galleryPhotos[index];
+            galleryPhotos[index] = galleryPhotos[targetIndex];
+            galleryPhotos[targetIndex] = temp;
+            persistData();
+            renderAdminGalleryList();
+            renderPublicGallery();
+        }
+
+        function deleteGalleryPhoto(photoId) {
+            if (!isAdminAuthenticated) return;
+            galleryPhotos = galleryPhotos.filter(p => p.id !== photoId);
+            persistData();
+            renderAdminGalleryList();
+            renderPublicGallery();
+            updateAdminDashboard();
+            showToast('फोटो गैलरी से हटा दी गई है।');
+        }
+
+        function resetDefaultGallery() {
+            if (!isAdminAuthenticated) return;
+            galleryPhotos = [...DEFAULT_GALLERY];
+            persistData();
+            renderAdminGalleryList();
+            renderPublicGallery();
+            updateAdminDashboard();
+            showToast('सभी 9 ओरिजिनल फोटो वापस गैलरी में जोड़ दी गई हैं।');
+        }
+
+        // =====================================================================
+        // FOLLOW STUDIO & PHONE NOTIFICATIONS
+        // =====================================================================
+        function playNotificationChime() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                osc.frequency.setValueAtTime(880, ctx.currentTime + 0.12);
+                gain.gain.setValueAtTime(0.12, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.45);
+            } catch (err) {}
+        }
+
+        function sendDeviceNotification(title, bodyText) {
+            playNotificationChime();
+            showToast(`🔔 ${title}: ${bodyText}`);
+
+            if ('Notification' in window && Notification.permission === 'granted') {
+                try {
+                    new Notification(title, {
+                        body: bodyText,
+                        tag: 'maa-films-studio-offer'
+                    });
+                } catch (e) {}
+            }
+        }
+
+        function updateFollowAndOfferUI() {
+            document.getElementById('follower-count-badge').textContent = totalFollowerCount;
+            const statFol = document.getElementById('stat-total-followers');
+            if (statFol) statFol.textContent = totalFollowerCount;
+
+            const followLabel = document.getElementById('follow-btn-label');
+            const heroFollowText = document.getElementById('hero-follow-text');
+            const bellIcon = document.getElementById('follow-bell-icon');
+
+            if (isUserFollowing) {
+                followLabel.textContent = 'Following ✓';
+                if (heroFollowText) heroFollowText.textContent = 'Following ✓ (Alerts ON)';
+                bellIcon.classList.remove('animate-bounce');
+            } else {
+                followLabel.textContent = 'Follow Studio';
+                if (heroFollowText) heroFollowText.textContent = 'Follow करें (Offer Alerts)';
+            }
+
+            const banner = document.getElementById('live-offer-banner');
+            const bannerText = document.getElementById('live-offer-banner-text');
+            if (studioOffers.length > 0) {
+                banner.classList.remove('hidden');
+                const latest = studioOffers[0];
+                bannerText.textContent = `${latest.title} (${latest.badge}) — ${latest.message}`;
+            } else {
+                banner.classList.add('hidden');
+            }
+
+            document.getElementById('modal-offer-count').textContent = studioOffers.length;
+        }
+
+        function openFollowModal() {
+            document.getElementById('unread-offer-dot').classList.add('hidden');
+            document.getElementById('follow-modal').classList.remove('hidden');
+        }
+
+        async function handleFollowSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('follower-name-input').value.trim() || 'VIP Follower';
+            const phone = document.getElementById('follower-phone-input').value.trim();
+
+            if ('Notification' in window && Notification.permission === 'default') {
+                try {
+                    await Notification.requestPermission();
+                } catch (err) {}
+            }
+
+            if (!isUserFollowing) {
+                isUserFollowing = true;
+                totalFollowerCount += 1;
+            }
+
+            if (phone && phone.length === 10) {
+                const exists = studioFollowers.some(f => f.phone === phone);
+                if (!exists) {
+                    const today = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+                    studioFollowers.unshift({ id: 'fol-' + Date.now(), name, phone, joinedAt: today });
+                }
+            }
+
+            persistData();
+            updateFollowAndOfferUI();
+            closeModal('follow-modal');
+            sendDeviceNotification("MAA FILM'S STUDIO", "धन्यवाद! अब आपको हर नए ऑफर का नोटिफिकेशन सबसे पहले मिलेगा।");
+        }
+
+        async function triggerTestPhoneNotification() {
+            if ('Notification' in window && Notification.permission !== 'granted') {
+                await Notification.requestPermission();
+            }
+            const latestOffer = studioOffers[0];
+            const msg = latestOffer
+                ? `${latestOffer.title} (${latestOffer.badge}) - ${latestOffer.message}`
+                : "MAA FILM'S STUDIO की तरफ से विशेष छूट उपलब्ध है!";
+            sendDeviceNotification("MAA FILM'S STUDIO — Offer Alert", msg);
+        }
+
+        function openOffersInboxModal() {
+            document.getElementById('unread-offer-dot').classList.add('hidden');
+            const feed = document.getElementById('customer-offers-feed');
+
+            if (studioOffers.length === 0) {
+                feed.innerHTML = `<p class="text-sm text-gray-400 text-center py-6">अभी कोई नया ऑफर उपलब्ध नहीं है।</p>`;
+            } else {
+                feed.innerHTML = studioOffers.map(off => `
+                    <div class="bg-studio-dark border border-amber-500/40 rounded-xl p-4 space-y-2">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full bg-amber-500 text-black text-xs font-extrabold">${off.badge}</span>
+                            <span class="text-[11px] text-gray-400">Valid Till: ${off.validTill}</span>
+                        </div>
+                        <h4 class="font-bold text-white text-base">${off.title}</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed">${off.message}</p>
+                        <div class="pt-2 flex justify-end">
+                            <button onclick="closeModal('offers-inbox-modal'); openBookingModal('${off.serviceId || services[0].id}')" class="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs transition">
+                                इस ऑफर के साथ बुक करें <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            document.getElementById('offers-inbox-modal').classList.remove('hidden');
+        }
+
+        // Customer Contact Us Quick Inquiry
+        function handleCustomerInquiry(e) {
+            e.preventDefault();
+            const name = document.getElementById('inq-name').value.trim();
+            const phone = document.getElementById('inq-phone').value.trim();
+            const message = document.getElementById('inq-message').value.trim();
+            const now = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            customerInquiries.unshift({
+                id: 'inq-' + Date.now(),
+                name,
+                phone,
+                message,
+                createdAt: now
+            });
+            persistData();
+            e.target.reset();
+            showToast('आपका संदेश Adarsh Singh (MAA FILM\'S STUDIO) को भेज दिया गया है!');
+        }
+
+        // Custom Toast Notification
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const colors = type === 'error'
+                ? 'bg-red-600 text-white border-red-400'
+                : 'bg-slate-900 text-white border-amber-500';
+            const icon = type === 'error' ? 'fa-circle-exclamation text-white' : 'fa-circle-check text-amber-400';
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl border shadow-2xl text-xs sm:text-sm font-medium transition-all duration-300 ${colors}`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-base"></i><span>${message}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        function getCategoryBadge(cat) {
+            const map = {
+                wedding: { icon: 'fa-heart', label: 'Wedding Special', color: 'text-pink-400 bg-pink-500/10 border-pink-500/30' },
+                music: { icon: 'fa-music', label: 'Music Video', color: 'text-amber-400 bg-amber-500/10 border-amber-500/30' },
+                event: { icon: 'fa-camera-retro', label: 'Event Shoot', color: 'text-blue-400 bg-blue-500/10 border-blue-500/30' },
+                editing: { icon: 'fa-film', label: '4K Editing', color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' }
+            };
+            return map[cat] || map.wedding;
+        }
+
+        function renderServices() {
+            const grid = document.getElementById('services-grid');
+            grid.innerHTML = services.map(srv => {
+                const badge = getCategoryBadge(srv.category);
+                return `
+                <div class="bg-studio-card rounded-2xl border border-studio-border hover:border-amber-500/60 p-6 flex flex-col justify-between transition-all duration-300 shadow-lg hover:shadow-amber-500/10 group">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${badge.color}">
+                                <i class="fa-solid ${badge.icon}"></i> ${badge.label}
+                            </span>
+                            <span class="text-xl sm:text-2xl font-black text-amber-400">₹${Number(srv.price).toLocaleString('en-IN')}</span>
+                        </div>
+                        <h4 class="text-lg font-extrabold text-white group-hover:text-amber-300 transition">${srv.name}</h4>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-2.5 leading-relaxed">${srv.description}</p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-studio-border flex items-center justify-between gap-3">
+                        <span class="text-[11px] text-gray-400"><i class="fa-solid fa-bolt text-amber-400 mr-1"></i>Instant Receipt</span>
+                        <button onclick="openBookingModal('${srv.id}')" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs sm:text-sm transition shadow flex items-center gap-2">
+                            <span>Book Now</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function openBookingModal(serviceId) {
+            const srv = services.find(s => s.id === serviceId);
+            if (!srv) return;
+            selectedServiceForBooking = srv;
+
+            document.getElementById('modal-service-name').textContent = srv.name;
+            document.getElementById('modal-service-price').textContent = `₹${Number(srv.price).toLocaleString('en-IN')}`;
+            document.getElementById('full-pay-label').textContent = `₹${Number(srv.price).toLocaleString('en-IN')}`;
+            document.getElementById('adv-pay-label').textContent = `₹${Math.round(srv.price * 0.3).toLocaleString('en-IN')}`;
+
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('cust-date');
+            dateInput.min = today;
+            if (!dateInput.value) dateInput.value = today;
+
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function proceedToPayment(e) {
+            e.preventDefault();
+            if (!selectedServiceForBooking) return;
+
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const eventDate = document.getElementById('cust-date').value;
+            const location = document.getElementById('cust-location').value.trim();
+            const payType = document.querySelector('input[name="payment-type"]:checked').value;
+
+            const total = Number(selectedServiceForBooking.price);
+            const payable = payType === 'ADVANCE' ? Math.round(total * 0.3) : total;
+
+            pendingBookingDraft = {
+                customerName: name,
+                customerPhone: phone,
+                eventDate,
+                location,
+                serviceId: selectedServiceForBooking.id,
+                serviceName: selectedServiceForBooking.name,
+                serviceDesc: selectedServiceForBooking.description,
+                totalPrice: total,
+                paidAmount: payable,
+                payType
+            };
+
+            document.getElementById('gateway-amount').textContent = `₹${payable.toLocaleString('en-IN')}`;
+            closeModal('booking-modal');
+            document.getElementById('payment-modal').classList.remove('hidden');
+        }
+
+        function selectPayMethod(method) {
+            selectedPaymentMethod = method;
+            const detailsBox = document.getElementById('pay-method-details');
+            document.querySelectorAll('.pay-method-btn').forEach(btn => {
+                btn.className = 'pay-method-btn p-2.5 rounded-xl border border-stone-200 bg-stone-50 text-stone-600 text-xs font-bold flex flex-col items-center gap-1';
+            });
+
+            if (method.includes('UPI')) {
+                document.getElementById('pm-upi').className = 'pay-method-btn p-2.5 rounded-xl border-2 border-amber-500 bg-amber-50 text-stone-900 text-xs font-bold flex flex-col items-center gap-1';
+                detailsBox.innerHTML = `
+                    <p class="text-xs font-semibold text-stone-700 mb-2">Scan QR with GPay, PhonePe, Paytm or UPI</p>
+                    <div class="w-32 h-32 mx-auto bg-white p-2 rounded-xl border border-stone-300 flex items-center justify-center">
+                        <i class="fa-solid fa-qrcode text-6xl text-stone-900"></i>
+                    </div>
+                    <p class="text-xs font-mono font-bold text-stone-800 mt-2">UPI ID: ${studioSettings.upiId}</p>
+                `;
+            } else if (method.includes('Card')) {
+                document.getElementById('pm-card').className = 'pay-method-btn p-2.5 rounded-xl border-2 border-amber-500 bg-amber-50 text-stone-900 text-xs font-bold flex flex-col items-center gap-1';
+                detailsBox.innerHTML = `
+                    <div class="space-y-2 text-left">
+                        <input type="text" value="4532 •••• •••• 8890" readonly class="w-full px-3 py-2 rounded-lg bg-white border border-stone-300 text-xs font-mono">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" value="12/29" readonly class="px-3 py-2 rounded-lg bg-white border border-stone-300 text-xs font-mono">
+                            <input type="password" value="123" readonly class="px-3 py-2 rounded-lg bg-white border border-stone-300 text-xs font-mono">
+                        </div>
+                        <p class="text-[11px] text-emerald-700 font-semibold"><i class="fa-solid fa-shield-check"></i> 256-Bit Encrypted Card Ready</p>
+                    </div>
+                `;
+            } else {
+                document.getElementById('pm-net').className = 'pay-method-btn p-2.5 rounded-xl border-2 border-amber-500 bg-amber-50 text-stone-900 text-xs font-bold flex flex-col items-center gap-1';
+                detailsBox.innerHTML = `
+                    <select class="w-full px-3 py-2 rounded-lg bg-white border border-stone-300 text-xs font-semibold">
+                        <option>State Bank of India (SBI)</option>
+                        <option>HDFC Bank</option>
+                        <option>Bank of Baroda</option>
+                        <option>Punjab National Bank (PNB)</option>
+                    </select>
+                    <p class="text-[11px] text-stone-500 mt-2">Instant Bank Authorization Enabled</p>
+                `;
+            }
+        }
+
+        function completeOnlinePayment() {
+            if (!pendingBookingDraft) return;
+
+            const btn = document.getElementById('confirm-pay-btn');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>Verifying Payment...</span>`;
+
+            setTimeout(() => {
+                const randomCode = Math.floor(1000 + Math.random() * 9000);
+                const now = new Date();
+                const formattedNow = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+                const newBooking = {
+                    bookingId: `MFS-${randomCode}`,
+                    customerName: pendingBookingDraft.customerName,
+                    customerPhone: pendingBookingDraft.customerPhone,
+                    eventDate: pendingBookingDraft.eventDate,
+                    location: pendingBookingDraft.location,
+                    serviceId: pendingBookingDraft.serviceId,
+                    serviceName: pendingBookingDraft.serviceName,
+                    serviceDesc: pendingBookingDraft.serviceDesc,
+                    totalPrice: pendingBookingDraft.totalPrice,
+                    paidAmount: pendingBookingDraft.paidAmount,
+                    paymentMode: pendingBookingDraft.payType === 'ADVANCE'
+                        ? `${selectedPaymentMethod} (30% Advance)`
+                        : `${selectedPaymentMethod} (Full Paid)`,
+                    status: 'Confirmed',
+                    createdAt: formattedNow
+                };
+
+                bookings.unshift(newBooking);
+                persistData();
+
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-lock"></i><span>Pay Now & Get Receipt</span>`;
+                document.getElementById('customer-booking-form').reset();
+                closeModal('payment-modal');
+
+                showToast('पेमेंट सफल! आपकी बुकिंग कन्फर्म हो गई है।');
+                openReceiptModal(newBooking.bookingId);
+                if (isAdminAuthenticated) updateAdminDashboard();
+            }, 850);
+        }
+
+        function openReceiptModal(bookingId) {
+            const b = bookings.find(item => item.bookingId === bookingId);
+            if (!b) return;
+
+            document.getElementById('rec-id').textContent = b.bookingId;
+            document.getElementById('rec-issue-date').textContent = `Issued: ${b.createdAt}`;
+            document.getElementById('rec-cust-name').textContent = b.customerName;
+            document.getElementById('rec-cust-phone').textContent = `+91 ${b.customerPhone}`;
+            document.getElementById('rec-event-date').textContent = b.eventDate;
+            document.getElementById('rec-location').textContent = b.location;
+            document.getElementById('rec-service-name').textContent = b.serviceName;
+            document.getElementById('rec-service-desc').textContent = b.serviceDesc || '';
+            document.getElementById('rec-total-price').textContent = `₹${Number(b.totalPrice).toLocaleString('en-IN')}`;
+            document.getElementById('rec-pay-mode').textContent = b.paymentMode;
+            document.getElementById('rec-paid-amount').textContent = `₹${Number(b.paidAmount).toLocaleString('en-IN')}`;
+
+            const balance = Number(b.totalPrice) - Number(b.paidAmount);
+            const balanceRow = document.getElementById('rec-balance-row');
+            if (balance > 0) {
+                balanceRow.classList.remove('hidden');
+                document.getElementById('rec-balance-amount').textContent = `₹${balance.toLocaleString('en-IN')}`;
+            } else {
+                balanceRow.classList.add('hidden');
+            }
+
+            const waText = `*MAA FILM'S STUDIO - BOOKING RECEIPT*%0A` +
+                `Booking ID: *${b.bookingId}*%0A` +
+                `Customer: ${b.customerName} (${b.customerPhone})%0A` +
+                `Service: ${b.serviceName}%0A` +
+                `Event Date: ${b.eventDate} | Location: ${b.location}%0A` +
+                `Paid Amount: *₹${b.paidAmount}* (Total: ₹${b.totalPrice})%0A` +
+                `Status: *${b.status}*%0A` +
+                `Managed by: Adarsh Singh (${studioSettings.whatsapp})`;
+
+            document.getElementById('rec-whatsapp-btn').onclick = () => {
+                window.open(`https://wa.me/91${studioSettings.whatsapp}?text=${waText}`, '_blank');
+            };
+
+            document.getElementById('receipt-modal').classList.remove('hidden');
+        }
+
+        function openTrackReceiptModal() {
+            document.getElementById('track-results').innerHTML = '';
+            document.getElementById('track-phone-input').value = '';
+            document.getElementById('track-modal').classList.remove('hidden');
+        }
+
+        function findCustomerReceipts(e) {
+            e.preventDefault();
+            const query = document.getElementById('track-phone-input').value.trim().toLowerCase();
+            const matches = bookings.filter(b =>
+                b.customerPhone.includes(query) || b.bookingId.toLowerCase().includes(query)
+            );
+            const container = document.getElementById('track-results');
+
+            if (matches.length === 0) {
+                container.innerHTML = `<p class="text-xs text-red-400 bg-red-500/10 p-2.5 rounded-lg">इस मोबाइल नंबर या Booking ID से कोई बुकिंग नहीं मिली।</p>`;
+                return;
+            }
+
+            container.innerHTML = matches.map(b => `
+                <div class="p-3 rounded-xl bg-studio-dark border border-studio-border flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-amber-400">${b.bookingId} • ${b.eventDate}</p>
+                        <p class="text-xs text-white font-medium">${b.serviceName}</p>
+                    </div>
+                    <button type="button" onclick="closeModal('track-modal'); openReceiptModal('${b.bookingId}')" class="px-3 py-1.5 rounded-lg bg-amber-500 text-black text-xs font-bold">
+                        View
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // =====================================================================
+        // ADMIN VIEW SWITCHING & CONTROLS
+        // =====================================================================
+        function switchView(view) {
+            const custView = document.getElementById('customer-view');
+            const adminView = document.getElementById('admin-view');
+
+            if (view === 'admin') {
+                if (!isAdminAuthenticated) {
+                    handleAdminNavClick();
+                    return;
+                }
+                custView.classList.add('hidden');
+                adminView.classList.remove('hidden');
+                updateAdminDashboard();
+            } else {
+                adminView.classList.add('hidden');
+                custView.classList.remove('hidden');
+                renderServices();
+                renderPublicGallery();
+                renderPublicReviews();
+            }
+        }
+
+        function switchAdminTab(tab) {
+            if (!isAdminAuthenticated) return;
+            const tabs = ['bookings', 'banner', 'gallery', 'services', 'offers', 'reviews', 'settings'];
+            tabs.forEach(t => {
+                const section = document.getElementById(`admin-tab-${t}`);
+                const btn = document.getElementById(`tab-${t}-btn`);
+                if (t === tab) {
+                    section.classList.remove('hidden');
+                    btn.className = 'px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 text-black whitespace-nowrap transition';
+                } else {
+                    section.classList.add('hidden');
+                    btn.className = 'px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-studio-card text-gray-300 hover:bg-slate-800 whitespace-nowrap transition';
+                }
+            });
+
+            if (tab === 'banner') renderAdminBannersList();
+            if (tab === 'gallery') renderAdminGalleryList();
+            if (tab === 'services') renderAdminServicesList();
+            if (tab === 'offers') renderAdminOffersAndFollowers();
+            if (tab === 'reviews') {
+                renderAdminReviewsList();
+                renderAdminInquiries();
+            }
+            if (tab === 'settings') {
+                document.getElementById('setting-phone-input').value = studioSettings.phone;
+                document.getElementById('setting-whatsapp-input').value = studioSettings.whatsapp;
+                document.getElementById('setting-email-input').value = studioSettings.email;
+                document.getElementById('setting-address-input').value = studioSettings.address;
+                document.getElementById('setting-upi-input').value = studioSettings.upiId;
+                document.getElementById('setting-youtube-input').value = studioSettings.youtubeName || 'Crazy Music World';
+                document.getElementById('setting-instagram-input').value = studioSettings.instagramHandle || '@adarshsinghofficial_';
+            }
+        }
+
+        function renderAdminInquiries() {
+            const box = document.getElementById('admin-inquiries-list');
+            if (!box) return;
+            if (customerInquiries.length === 0) {
+                box.innerHTML = `<p class="text-xs text-gray-400">अभी कोई नया कस्टमर संदेश नहीं आया है।</p>`;
+                return;
+            }
+            box.innerHTML = customerInquiries.map(inq => `
+                <div class="p-3.5 rounded-xl bg-studio-dark border border-studio-border space-y-1.5">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-bold text-white">${inq.name} <span class="text-xs text-amber-400">(${inq.phone})</span></p>
+                        <span class="text-[10px] text-gray-400">${inq.createdAt}</span>
+                    </div>
+                    <p class="text-xs text-gray-300">${inq.message}</p>
+                    <div class="pt-1 flex justify-end">
+                        <a href="https://wa.me/91${inq.phone}" target="_blank" class="px-2.5 py-1 rounded bg-emerald-600 text-white text-[11px] font-bold">
+                            <i class="fa-brands fa-whatsapp mr-1"></i> Reply on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAdminOffersAndFollowers() {
+            const srvSelect = document.getElementById('offer-service-select');
+            srvSelect.innerHTML = services.map(s => `<option value="${s.id}">${s.name} (₹${s.price})</option>`).join('');
+
+            const validInput = document.getElementById('offer-valid-input');
+            if (!validInput.value) {
+                const nextWeek = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+                validInput.value = nextWeek;
+            }
+
+            const offersList = document.getElementById('admin-offers-list');
+            if (studioOffers.length === 0) {
+                offersList.innerHTML = `<p class="text-xs text-gray-400">अभी कोई ऑफर पब्लिश नहीं किया गया है।</p>`;
+            } else {
+                offersList.innerHTML = studioOffers.map(off => `
+                    <div class="p-3.5 rounded-xl bg-studio-dark border border-studio-border flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 rounded bg-amber-500 text-black text-[10px] font-extrabold">${off.badge}</span>
+                                <h5 class="font-bold text-white text-sm">${off.title}</h5>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">${off.message}</p>
+                            <p class="text-[11px] text-amber-400/80 mt-1">Valid Till: ${off.validTill}</p>
+                        </div>
+                        <button onclick="deleteOffer('${off.id}')" class="p-2 rounded-lg bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs transition" title="Delete Offer">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('admin-follower-pill').textContent = `${totalFollowerCount} Total`;
+            const folList = document.getElementById('admin-followers-list');
+            const latestOffer = studioOffers[0];
+            const offerShareText = latestOffer
+                ? `Namaste! *MAA FILM'S STUDIO* ka naya offer aaya hai:%0A*${latestOffer.title}* (${latestOffer.badge})%0A${latestOffer.message}%0ABook Now - Adarsh Singh (${studioSettings.whatsapp})`
+                : `Namaste! *MAA FILM'S STUDIO* mein Wedding aur Music Video booking par vishesh chhoot chal rahi hai. Sampark karein: ${studioSettings.whatsapp}`;
+
+            if (studioFollowers.length === 0) {
+                folList.innerHTML = `<p class="text-xs text-gray-400">अभी तक किसी ने WhatsApp नंबर नहीं जोड़ा है।</p>`;
+            } else {
+                folList.innerHTML = studioFollowers.map(f => `
+                    <div class="p-3 rounded-xl bg-studio-dark border border-studio-border flex items-center justify-between gap-2">
+                        <div>
+                            <p class="text-sm font-bold text-white">${f.name}</p>
+                            <p class="text-xs text-gray-400">+91 ${f.phone} • Joined ${f.joinedAt}</p>
+                        </div>
+                        <a href="https://wa.me/91${f.phone}?text=${offerShareText}" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1 transition">
+                            <i class="fa-brands fa-whatsapp"></i> Send Offer
+                        </a>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function handlePublishOffer(e) {
+            e.preventDefault();
+            if (!isAdminAuthenticated) return;
+            const title = document.getElementById('offer-title-input').value.trim();
+            const badge = document.getElementById('offer-badge-input').value.trim();
+            const serviceId = document.getElementById('offer-service-select').value;
+            const validTill = document.getElementById('offer-valid-input').value;
+            const message = document.getElementById('offer-msg-input').value.trim();
+
+            const newOffer = {
+                id: 'off-' + Date.now(),
+                title,
+                badge,
+                serviceId,
+                validTill,
+                message,
+                createdAt: 'Just Now'
+            };
+
+            studioOffers.unshift(newOffer);
+            persistData();
+            updateFollowAndOfferUI();
+            renderAdminOffersAndFollowers();
+
+            document.getElementById('unread-offer-dot').classList.remove('hidden');
+            e.target.reset();
+            sendDeviceNotification(`MAA FILM'S STUDIO: ${title} (${badge})`, message);
+        }
+
+        function deleteOffer(offerId) {
+            if (!isAdminAuthenticated) return;
+            studioOffers = studioOffers.filter(o => o.id !== offerId);
+            persistData();
+            updateFollowAndOfferUI();
+            renderAdminOffersAndFollowers();
+            showToast('ऑफर हटा दिया गया है।');
+        }
+
+        function saveStudioSettings(e) {
+            e.preventDefault();
+            if (!isAdminAuthenticated) return;
+            studioSettings.phone = document.getElementById('setting-phone-input').value.trim();
+            studioSettings.whatsapp = document.getElementById('setting-whatsapp-input').value.trim();
+            studioSettings.email = document.getElementById('setting-email-input').value.trim();
+            studioSettings.address = document.getElementById('setting-address-input').value.trim();
+            studioSettings.upiId = document.getElementById('setting-upi-input').value.trim();
+            studioSettings.youtubeName = document.getElementById('setting-youtube-input').value.trim();
+            studioSettings.instagramHandle = document.getElementById('setting-instagram-input').value.trim();
+
+            persistData();
+            applyContactDetails();
+            showToast('आपका कॉन्टेक्ट नंबर, पता और सेटिंग्स पूरी वेबसाइट पर अपडेट हो गईं!');
+        }
+
+        function updateAdminDashboard() {
+            const activeBookings = bookings.filter(b => b.status !== 'Cancelled');
+            const totalRevenue = activeBookings.reduce((sum, b) => sum + Number(b.paidAmount || 0), 0);
+
+            document.getElementById('stat-total-bookings').textContent = bookings.length;
+            document.getElementById('stat-total-revenue').textContent = `₹${totalRevenue.toLocaleString('en-IN')}`;
+            document.getElementById('stat-total-reviews').textContent = customerReviews.length;
+            document.getElementById('stat-total-followers').textContent = totalFollowerCount;
+
+            renderAdminBookings();
+            renderAdminServicesList();
+            renderAdminGalleryList();
+        }
+
+        function renderAdminBookings() {
+            const query = (document.getElementById('booking-search')?.value || '').toLowerCase();
+            const statusFilter = document.getElementById('booking-status-filter')?.value || 'ALL';
+
+            const filtered = bookings.filter(b => {
+                const matchesSearch = b.customerName.toLowerCase().includes(query) ||
+                    b.customerPhone.includes(query) ||
+                    b.bookingId.toLowerCase().includes(query);
+                const matchesStatus = statusFilter === 'ALL' || b.status === statusFilter;
+                return matchesSearch && matchesStatus;
+            });
+
+            const tbody = document.getElementById('admin-bookings-tbody');
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-gray-400">कोई बुकिंग रिकॉर्ड नहीं मिला।</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(b => {
+                const statusColors = {
+                    Confirmed: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
+                    Completed: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
+                    Cancelled: 'bg-red-500/15 text-red-400 border-red-500/30'
+                };
+                const waMsg = encodeURIComponent(`Namaste ${b.customerName} ji, aapki MAA FILM'S STUDIO ki booking (${b.bookingId}) date ${b.eventDate} ke liye ${b.status} hai. - Adarsh Singh`);
+
+                return `
+                <tr class="hover:bg-slate-900/50 transition">
+                    <td class="p-4 align-top">
+                        <span class="font-mono font-bold text-amber-400">${b.bookingId}</span>
+                        <p class="text-xs text-gray-400 mt-0.5"><i class="fa-regular fa-calendar mr-1"></i>${b.eventDate}</p>
+                    </td>
+                    <td class="p-4 align-top">
+                        <p class="font-bold text-white">${b.customerName}</p>
+                        <p class="text-xs text-gray-400 mt-0.5">${b.customerPhone}</p>
+                    </td>
+                    <td class="p-4 align-top max-w-xs">
+                        <p class="font-semibold text-gray-200 text-xs sm:text-sm">${b.serviceName}</p>
+                        <p class="text-xs text-gray-400 mt-0.5"><i class="fa-solid fa-location-dot text-amber-500 mr-1"></i>${b.location}</p>
+                    </td>
+                    <td class="p-4 align-top">
+                        <p class="font-bold text-emerald-400">₹${Number(b.paidAmount).toLocaleString('en-IN')}</p>
+                        <p class="text-[11px] text-gray-400">Total: ₹${Number(b.totalPrice).toLocaleString('en-IN')}</p>
+                    </td>
+                    <td class="p-4 align-top">
+                        <select onchange="changeBookingStatus('${b.bookingId}', this.value)" class="px-2.5 py-1 rounded-lg text-xs font-bold border bg-studio-dark ${statusColors[b.status] || ''}">
+                            <option value="Confirmed" ${b.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                            <option value="Completed" ${b.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                            <option value="Cancelled" ${b.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                        </select>
+                    </td>
+                    <td class="p-4 align-top text-right">
+                        <div class="inline-flex items-center gap-1.5">
+                            <button onclick="openReceiptModal('${b.bookingId}')" title="View/Print Receipt" class="p-2 rounded-lg bg-slate-800 hover:bg-amber-500 hover:text-black text-amber-400 transition">
+                                <i class="fa-solid fa-receipt"></i>
+                            </button>
+                            <a href="https://wa.me/91${b.customerPhone}?text=${waMsg}" target="_blank" title="WhatsApp Customer" class="p-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white transition">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                `;
+            }).join('');
+        }
+
+        function changeBookingStatus(bookingId, newStatus) {
+            if (!isAdminAuthenticated) return;
+            const idx = bookings.findIndex(b => b.bookingId === bookingId);
+            if (idx !== -1) {
+                bookings[idx].status = newStatus;
+                persistData();
+                updateAdminDashboard();
+                showToast(`Booking ${bookingId} updated to ${newStatus}`);
+            }
+        }
+
+        // Service & Price CRUD
+        function renderAdminServicesList() {
+            const list = document.getElementById('admin-services-list');
+            list.innerHTML = services.map(srv => `
+                <div class="bg-studio-card p-4 rounded-2xl border border-studio-border flex items-start justify-between gap-4">
+                    <div>
+                        <h4 class="font-bold text-white text-sm sm:text-base">${srv.name}</h4>
+                        <p class="text-amber-400 font-extrabold text-base mt-1">₹${Number(srv.price).toLocaleString('en-IN')}</p>
+                        <p class="text-xs text-gray-400 mt-1">${srv.description}</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button onclick="editService('${srv.id}')" class="p-2 rounded-lg bg-slate-800 hover:bg-amber-500 hover:text-black text-amber-400 text-xs transition" title="Edit">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button onclick="deleteService('${srv.id}')" class="p-2 rounded-lg bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs transition" title="Delete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function handleSaveService(e) {
+            e.preventDefault();
+            if (!isAdminAuthenticated) return;
+            const id = document.getElementById('edit-service-id').value;
+            const name = document.getElementById('service-name-input').value.trim();
+            const price = Number(document.getElementById('service-price-input').value);
+            const category = document.getElementById('service-category-input').value;
+            const description = document.getElementById('service-desc-input').value.trim();
+
+            if (id) {
+                const idx = services.findIndex(s => s.id === id);
+                if (idx !== -1) {
+                    services[idx] = { id, name, price, category, description };
+                    showToast('सर्विस और प्राइस अपडेट हो गया!');
+                }
+            } else {
+                services.push({
+                    id: 'srv-' + Date.now(),
+                    name,
+                    price,
+                    category,
+                    description
+                });
+                showToast('नई सर्विस वेबसाइट पर जोड़ दी गई है!');
+            }
+
+            persistData();
+            resetServiceForm();
+            renderAdminServicesList();
+            renderServices();
+        }
+
+        function editService(id) {
+            if (!isAdminAuthenticated) return;
+            const srv = services.find(s => s.id === id);
+            if (!srv) return;
+            document.getElementById('edit-service-id').value = srv.id;
+            document.getElementById('service-name-input').value = srv.name;
+            document.getElementById('service-price-input').value = srv.price;
+            document.getElementById('service-category-input').value = srv.category;
+            document.getElementById('service-desc-input').value = srv.description;
+
+            document.getElementById('service-form-title').innerHTML = `<i class="fa-solid fa-pen text-amber-400"></i> सर्विस एडिट करें (Edit Service)`;
+            document.getElementById('cancel-edit-service-btn').classList.remove('hidden');
+            document.getElementById('admin-service-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetServiceForm() {
+            document.getElementById('admin-service-form').reset();
+            document.getElementById('edit-service-id').value = '';
+            document.getElementById('service-form-title').innerHTML = `<i class="fa-solid fa-plus-circle text-amber-400"></i> नई सर्विस जोड़ें (Add New Service)`;
+            document.getElementById('cancel-edit-service-btn').classList.add('hidden');
+        }
+
+        function deleteService(id) {
+            if (!isAdminAuthenticated) return;
+            if (services.length <= 1) {
+                showToast('कम से कम 1 सर्विस रखना अनिवार्य है।', 'error');
+                return;
+            }
+            services = services.filter(s => s.id !== id);
+            persistData();
+            renderAdminServicesList();
+            renderServices();
+            showToast('सर्विस हटा दी गई है।');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Keyboard Support for Lightbox Navigation
+        document.addEventListener('keydown', (e) => {
+            const lb = document.getElementById('lightbox-modal');
+            if (!lb.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') navigateLightbox(1);
+                if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                if (e.key === 'Escape') closeModal('lightbox-modal');
+            }
+        });
+
+        // Initial App Render
+        window.addEventListener('DOMContentLoaded', () => {
+            applyContactDetails();
+            renderTopBanner();
+            restartBannerAutoSlide();
+            renderPublicGallery();
+            renderServices();
+            renderPublicReviews();
+            updateFollowAndOfferUI();
+            updateAdminLockIcon();
+        });
+    </script>
+</body>
+</html>
